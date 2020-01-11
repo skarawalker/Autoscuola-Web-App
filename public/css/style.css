@@ -47,13 +47,13 @@ main {
     margin: 0 auto
 }
 
-article {
+/*article {
     margin: 0 1em;
     padding: 0 22px;
     -webkit-transition: -webkit-transform .3s;
     -moz-transition: : -moz-transform .3s;
     transition: transform .3s;
-}
+}*/
 
 header {
     margin: 0;
@@ -141,7 +141,7 @@ a {
 	  box-shadow: 0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);
 }
 .btn-primary {
-	  border: 2px solid #2BBBAD;
+	  border: 2px solid rgb(10, 92, 243);
     color: #00695c!important;
     background-color: transparent;
 }

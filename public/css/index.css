@@ -1,14 +1,35 @@
-.nav {
+/**
+ * Panello latearle autouscente con navigazione
+ * che esce al clic da sinistra
+ */
+ 
+ .column {
+    float: left;
+    width: 50%;
+    margin-left: 30px;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+    margin-left: 30px;
+  }
+  .mylist{
+    margin-left: 30px;   
+  }
+ .nav {
     /*  largezza libera, potrai sperimentare */
     width: 320px;
     min-width: 320px;
-    /* fissiamo e indichiamo l'altezz massimale  */
+    /* fissimo e indichimo l'altezz massimale  */
     height: 100%;
     position: fixed;
     top: 0;
     bottom: 0;
     margin: 0;
-    /* spostiamo(nscondiamo)il pannelo rispetto bordo sinistro della pagina  */
+    /* spostimo(nscondimo)il panelo rispetto bordo sinistro della pagina  */
     left: -320px;
     /* spazzi interni */
     padding: 15px 20px;
@@ -16,28 +37,28 @@
     -webkit-transition: left 0.3s;
     -moz-transition: left 0.3s;
     transition: left 0.3s;
-    /* indichiamo il colore dello sfondo del panello */
-    background: #16a085;
+    /* indichimo il colore dello sfondo del panello */
+    background: #0c1950;
     /* indichiamo che sara sopra tutti gli altri elementi della pagina  */
     z-index: 2000;
 }
  
 /**
- * Bottone interruttore del pannello 
+ * Bottone interruttore del panello 
  * tag <label>
  */
  
 .nav-toggle {
     /* posizionamento assoluto*/
     position: absolute;
-    /*  spazio rispetto bordo sinistro del pannello  */
+    /*  spazio rispetto bordo sinistro del panello  */
     left: 320px;
     /* rispetto bordo superiore  */
     top: 1em;
     /* spazzi interni  */
     padding: 0.5em;
-    /* indichiamo il colore dello sfondo del interruttore
-     * di solito corrisponde al colore del pannello 
+    /* indichimo il colore dllo sfondo del interruttore
+     * di solito corrisponde al colore del panello 
     */
     background: inherit;
     /* colore del testo */
@@ -55,7 +76,7 @@
     transition: color .25s ease-in-out;
 }
  
-/* identifichiamo l'aspetto del bottone interruttore 
+/* identifichino il teso del bottone interruttore 
  * simbolo Unicode (TRIGRAM FOR HEAVEN)
 */
  
@@ -72,7 +93,7 @@
  
 /**
  * Checkbox nascosto
- * invisibile e inaccessibile 
+ * invisibile e inaccessibile  :)
  * nome del selettore del attributo del checkbox
  */
  
@@ -213,7 +234,7 @@ body {
 /**
  * Decoriamo il menu 
  * usando la lista non numerata per le voci
- * aggiungiamo passaggi e trasformazioni 
+ * aggiungiamo passaggi morbidi e trasformazioni 
  */
  
 .nav > ul {
@@ -278,7 +299,7 @@ body {
  
  
 /**
- * decoriamo voci del menu 
+ * decoriamo link delle voci del menu 
  */
  
 .nav > ul > li > a {
@@ -331,7 +352,7 @@ body {
     bottom: 0;
     height: 1px;
     width: 100%;
-    background: #3bc1a0;
+    background: #04649b;
     -webkit-transition: width .5s ease;
     transition: width .5s ease;
 }
@@ -342,7 +363,7 @@ body {
  
 .nav > ul > li > a:hover:before {
     width: 0%;
-    background: #3bc1a0;
+    background: #0677a3;
     -webkit-transition: width .5s ease;
     transition: width .5s ease;
 }
@@ -357,7 +378,7 @@ body {
 /* lo sfondo oscurante della pagina  
  * in questo caso ellementi vengono blocati */
  
-/*
+
 .mask-content {
     display: block;
     position: fixed;
@@ -377,4 +398,3 @@ body {
     -webkit-transition: opacity .5s, visibility .5s;
     transition: opacity .5s, visibility .5s;
 }
-*/
