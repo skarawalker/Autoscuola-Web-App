@@ -1,5 +1,5 @@
 const { Pool } = require('pg');
-// your credentials
+// DB user credentials
 DATABASE_URL = 'postgres://starkiller:74hryq@127.0.0.1:5432/autoscuola';
 
 const pool = new Pool({
@@ -15,6 +15,7 @@ function query(text) {
         resolve(res);
       })
       .catch((err) => {
+        console.error(error)
         reject(err);
       });
   });

@@ -1,7 +1,5 @@
-var data;
-var items = [];
-var jsonfile;
-$.getJSON('http://localhost:8000/pending.json', function (data) {
+$.getJSON('http://localhost:8000/getNextExpirations', function (data) {
+    var items = []
     console.log(data);
     items.push("<tr><th>Nome</th><th>Cognome</th> <th>Data Scadenza</th> </tr>");
     $.each(data.rows, function (i, j) {
