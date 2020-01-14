@@ -16,7 +16,6 @@ const User = {
       const { rows } = await database.query(readAllQuery);
       return res.send({ rows });
     } catch (error) {
-      console.error(error)
       return res.send(error);
     }
   }

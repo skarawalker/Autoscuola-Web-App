@@ -1,6 +1,5 @@
 $.getJSON('http://localhost:8000/getNextExpirations', function (data) {
     var items = []
-    console.log(data);
     items.push("<tr><th>Nome</th><th>Cognome</th> <th>Data Scadenza</th> </tr>");
     $.each(data.rows, function (i, j) {
         const dataScadenza = new Date(j.data_scadenza)

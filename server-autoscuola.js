@@ -22,15 +22,16 @@ app.use(express.static(__dirname + '/'));
 // Lists next expiring driving licenses
 app.get('/getNextExpirations', User.readPending);
 
+// Lists all guests
+app.get('/readall', User.readAll);
 
-const fileHTML = fs.readFileSync('index.html');
+const fileHTML = fs.readFileSync('public/index.html');
 
-app.get('/index.html', function (req, res) {
+app.get('/', function (req, res) {
   res.end(fileHTML);
 });
 
-app.post("/", function (req, res) {
-  console.log("Ricevuto una richiesta POST");
+app.post("/public", function (req, res) {
   res.end(fs.readFileSync(__dirname + '/public/client_search.html'))
 });
 
@@ -53,11 +54,10 @@ app.get('/search', function (req, res) {
   if (req.query.dn != "") request["dn"] = req.query.dn.toUpperCase();
   if (req.query.cf != "") request["cf"] = req.query.cf.toUpperCase();
 
-  pool.query("SELECT * FROM cliente WHERE nome=$1::varchar OR cognome=$2::varchar OR data_nascita=$3::date OR cod_fis=$4::char", [request["nome"], request["cognome"], request["dn"], request["cf"]], function (err, result) {
+  pool.query("SELECT * FROM cliente WHERE (nome=$1::varchar OR $1::varchar IS NULL) AND (cognome=$2::varchar OR $2::varchar IS NULL) AND (data_nascita=$3::date OR $3::DATE is null) AND (cod_fis=$4::char OR $4::char IS NULL)", [request["nome"], request["cognome"], request["dn"], request["cf"]], function (err, result) {
     if (err) {
       console.error(err)
     }
-
     res.json(result);
   });
 });

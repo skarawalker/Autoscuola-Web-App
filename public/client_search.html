@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/public/css/index.css">
     <link rel="stylesheet" type="text/css" href="/public/css/otherpages.css">
     <script type="text/javascript" src="/jquery.min.js"></script>
-    <script type='text/javascript' src="/public/cs.js"></script>
+    <script type='text/javascript' src="/public/scripts/cs.js"></script>
     <title>Gestione Autoscuola</title>
     <link rel='shortcut icon' type='image/x-icon' href='/public/images/favicon.ico' />
 </head>
@@ -20,7 +20,7 @@
             <a>Go Car Home</a>
         </h2>
         <ul id="menu">
-            <li><a href="../index.html">Home</a></li>
+            <li><a href="/public/index.html">Home</a></li>
             <li><a href="/public/client_search.html">Ricerca Utenti</a></li>
             <li><a href="/public/guide.html">Prenotazione Guide</a></li>
             <li><a href="/public/esami.html">Prenotazione esami</a></li>
@@ -51,12 +51,14 @@
                         <input type="text" name="cf">
                     </div>
                     <div class="column">
-                        <input type="submit" name="submit">
+                        <input type="submit" name="submit" value="Ricerca"/>
                     </div>
-                    <br>
-                    <br>
-                </div>
-            </form><br>
+            </form>
+                    <div class="column">
+                        <form id="readAllForm">
+                            <input  type="submit" value="Cerca tutti" name="Mostra tutti"/>
+                        </form>
+                    </div>
         </div>
         <div class="divisore">
 
