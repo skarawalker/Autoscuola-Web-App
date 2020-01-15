@@ -22,72 +22,49 @@
         <ul id="menu">
             <li><a href="/public/index.html">Home</a></li>
             <li><a href="/public/user_insert.html">Gestione Iscritti</a></li>
-            <li><a href="/public/guide.html">Prenotazione Guide</a></li>
+            <li><a href="/public/guide_insert.html">Prenotazione Guide</a></li>
             <li><a href="/public/esami.html">Prenotazione esami</a></li>
             <li><a href="#">Su di noi</a></li>
         </ul>
 
     </nav>
+    <ul class="bs-ul">
+        <li class="bs-li" style="float:center-left"><a href="/public/guide_insert.html">Inserimento Guide</a></li>
+        <li class="bs-li" style="float:center-right"><a href="/public/guide_ricerca.html">Gestione Guide</a></li>
+    </ul>
     <main>
         <article>
             <section>
                 <header class="search">
-                    <h2>Inserimento Guida</h2>
+                    <h2>Ricerca Guida</h2>
                 </header>
             </section>
             <table>
-                <form id="guideForm">
+                <form id="searchForm">
                     <tr>
                         <td class="column">
-                            Nome*:
+                            Nome:
                             <input type="text" name="nome" />
                         </td>
                         <td class="column">
-                            Cognome*:
+                            Cognome:
                             <input type="text" name="cognome" />
                         </td>
                     </tr>
                     <tr>
                         <td class="column">
-                            Data Nascita:
-                            <input type="date" name="dn" />
-                        </td>
-                        <td class="column">
-                            Patente*:
-                            <input type="text" name="pat" />
+                            Data:
+                            <input type="date" name="data" />
                         </td>
                     </tr>
                     <tr>
                         <td class="column">
-                            Data e Ora*:
-                            <input type="datetime-local" name="dt" />
-                        </td>
-                        <td class="column">
-                            Durata*:
-                            <select name="durata">
-                                <option value="0.5" selected>Mezz'ora</option>
-                                <option value="1">1 ora</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="column">
-                            Istruttore*:
-                            <select id="selectBox">
-
-                            </select>
-                        </td>
-                        <td class="column">
-                            * Campi obbligatori
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="column">
-                            <input type="submit" name="submit" value="Inserisci" />
+                            <input type="submit" name="submit" value="Cerca" />
                         </td>
                     </tr>
                 </form>
             </table>
+            <section class="response"></section>
         </article>
     </main>
 </body>

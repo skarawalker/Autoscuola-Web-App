@@ -37,7 +37,7 @@ $(function() {
                 alert("Utente Inserito")
             },
             error: function(e) {
-                alert('Errore generico')
+                alert(e.responseText)
             }
         });
     });

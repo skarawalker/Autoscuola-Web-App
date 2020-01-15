@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/public/css/index.css">
     <link rel="stylesheet" type="text/css" href="/public/css/otherpages.css">
     <script type="text/javascript" src="/jquery.min.js"></script>
-    <script type='text/javascript' src="/public/scripts/um.js"></script>
+    <script type="text/javascript" src="/public/scripts/guide.js"></script>
     <title>Gestione Autoscuola</title>
     <link rel='shortcut icon' type='image/x-icon' href='/public/images/favicon.ico' />
 </head>
@@ -21,7 +21,7 @@
         </h2>
         <ul id="menu">
             <li><a href="/public/index.html">Home</a></li>
-            <li><a href="/public/user_manag.html">Gestione Iscritti</a></li>
+            <li><a href="/public/user_insert.html">Gestione Iscritti</a></li>
             <li><a href="/public/guide_insert.html">Prenotazione Guide</a></li>
             <li><a href="/public/esami.html">Prenotazione esami</a></li>
             <li><a href="#">Su di noi</a></li>
@@ -29,74 +29,71 @@
 
     </nav>
     <ul class="bs-ul">
-        <li class="bs-li" style="float:center-left">
-            <a href="/public/user_insert.html">Inserimento Utente</a>
-        </li>
-        <li class="bs-li" style="float:center-right">
-            <a href="/public/user_search.html">Ricerca Utente</a>
-        </li>
+        <li class="bs-li" style="float:center-left"><a href="/public/guide_insert.html">Inserimento Guide</a></li>
+        <li class="bs-li" style="float:center-right"><a href="/public/guide_ricerca.html">Gestione Guide</a></li>
     </ul>
-    <main role="main">
+    <main>
         <article>
             <section>
                 <header class="search">
-                    <h2>Nuovo Utente</h2>
+                    <h2>Inserimento Guida</h2>
                 </header>
             </section>
             <table>
-                <form id="insertForm">
+                <form id="guideForm">
                     <tr>
                         <td class="column">
-                            <h6>Nome*:</h6>
-                            <input type="text" name="nome1" placeholder="Nome" />
+                            Nome*:
+                            <input type="text" name="nome" />
                         </td>
                         <td class="column">
-                            <h6>Cognome*:</h6>
-                            <input type="text" name="cognome1" placeholder="Cognome" />
+                            Cognome*:
+                            <input type="text" name="cognome" />
                         </td>
                     </tr>
                     <tr>
                         <td class="column">
-                            <h6>Data di nascita*:</h6>
-                            <input type="date" name="dn1" />
+                            Data Nascita:
+                            <input type="date" name="dn" />
                         </td>
                         <td class="column">
-                            <h6>Codice Fiscale*:</h6>
-                            <input type="text" name="cf1" placeholder="Codice Fiscale" />
+                            Patente*:
+                            <input type="text" name="patente" />
                         </td>
                     </tr>
                     <tr>
                         <td class="column">
-                            <h6>Luogo Nascita*:</h6>
-                            <input type="text" name="ln1" placeholder="Treviso(TV)" />
+                            Data e Ora*:
+                            <input type="datetime-local" name="dt" />
                         </td>
                         <td class="column">
-                            <h6>Telefono*:</h6>
-                            <input type="text" name="telefono1" placeholder="+39 ..." />
+                            Durata*:
+                            <select name="durata">
+                                <option value="1" selected>Mezz'ora</option>
+                                <option value="2">Un ora</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
                         <td class="column">
-                            <h6>E-mail:</h6>
-                            <input type="text" name="email1" placeholder="example@example.boh" />
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td class="column">
-                            <input type="submit" name="submit1" value="Inserisci" />
-                        </td>
-                        <td class="column">
-                            <h6>* Campi Obbligatori</h6>
-                        </td>
-                    </tr>
+                            Istruttore*:
+                            <select id="selectBox" name="istruttore">
 
+                            </select>
+                        </td>
+                        <td class="column">
+                            * Campi obbligatori
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="column">
+                            <input type="submit" name="submit" value="Inserisci" />
+                        </td>
+                    </tr>
                 </form>
             </table>
         </article>
-
     </main>
-    <div class="mask-content"> </div>
 </body>
 
 </html>

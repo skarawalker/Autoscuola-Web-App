@@ -56,7 +56,8 @@
     /*  spazio rispetto bordo sinistro del panello  */
     left: 320px;
     /* spazzi interni  */
-    padding: 0.77em;
+    padding: 6%;
+    height: 6%;
     /* indichimo il colore dllo sfondo del interruttore
      * di solito corrisponde al colore del panello 
     */
@@ -316,22 +317,6 @@ body {
 /**
  * decoriamo link delle voci del menu 
  */
-
-.l-nav>ul>li>a {
-    display: inline-block;
-    position: relative;
-    padding: 0;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-    font-size: 1.2em;
-    color: #dadada;
-    width: 100%;
-    text-decoration: none;
-    /* passagio morbido */
-    -webkit-transition: color .5s ease, padding .5s ease;
-    -moz-transition: color .5s ease, padding .5s ease;
-    transition: color .5s ease, padding .5s ease;
-}
 
 
 /**
