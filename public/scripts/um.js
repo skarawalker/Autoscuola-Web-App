@@ -39,9 +39,9 @@ $(function() {
             error: function(e) {
                 alert('Errore generico')
             }
-        })
+        });
     });
-})
+});
 
 $(function() {
     $("#readAllForm").submit(function(e) {
@@ -57,8 +57,8 @@ $(function() {
             $(".response").empty()
             const table = $("<table class='t'>", {
                 "class": "response"
-            })
+            });
             table.html(items.join('')).appendTo(".response")
         });
     });
-})
+});

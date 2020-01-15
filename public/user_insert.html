@@ -13,9 +13,9 @@
 </head>
 
 <body>
-    <input type="checkbox" id="nav-toggle" hidden>
-    <nav class="nav">
-        <label for="nav-toggle" class="nav-toggle" onclick></label>
+    <input type="checkbox" id="l-nav-toggle" hidden>
+    <nav class="l-nav">
+        <label for="l-nav-toggle" class="l-nav-toggle" onclick></label>
         <h2 class="logo">
             <a>Go Car Home</a>
         </h2>
@@ -28,42 +28,46 @@
         </ul>
 
     </nav>
+    <ul class="bs-ul">
+        <li class="bs-li" style="float:center-left"><a href="/public/user_insert.html">Inserimento Utente</a></li>
+        <li class="bs-li" style="float:center-right"><a href="/public/user_search.html">Ricerca Utente</a></li>
+    </ul>
     <main role="main">
         <article>
             <section>
                 <header class="search">
-                    <h2>Inserimento Utente</h2>
+                    <h2>Nuovo Utente</h2>
                 </header>
             </section>
             <table>
                 <form id="insertForm">
                     <tr>
                         <td class="column">
-                            Nome:
+                            Nome*:
                             <input type="text" name="nome1" />
                         </td>
                         <td class="column">
-                            Cognome:
+                            Cognome*:
                             <input type="text" name="cognome1" />
                         </td>
                     </tr>
                     <tr>
                         <td class="column">
-                            Data di nascita:
+                            Data di nascita*:
                             <input type="date" name="dn1" />
                         </td>
                         <td class="column">
-                            Codice Fiscale:
+                            Codice Fiscale*:
                             <input type="text" name="cf1" />
                         </td>
                     </tr>
                     <tr>
                         <td class="column">
-                            Luogo Nascita:
+                            Luogo Nascita*:
                             <input type="text" name="ln1" />
                         </td>
                         <td class="column">
-                            Telefono:
+                            Telefono*:
                             <input type="text" name="telefono1" />
                         </td>
                     </tr>
@@ -78,56 +82,15 @@
                         <td class="column">
                             <input type="submit" name="submit1" value="Inserisci" />
                         </td>
+                        <td class="column">
+                            * Campi Obbligatori
+                        </td>
                     </tr>
+
                 </form>
             </table>
         </article>
-        <article>
-            <section>
-                <header>
-                    <h2>Ricerca Utente</h2>
-                </header>
-            </section>
-            <table>
-                <form id="searchForm">
-                    <tr>
-                        <td class="column">
-                            Nome:
-                            <input type="text" name="nome" />
-                        </td>
-                        <td class="column">
-                            Cognome:
-                            <input type="text" name="cognome" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="column">
-                            Data di nascita:
-                            <input type="date" name="dn" />
-                        </td>
-                        <td class="column">
-                            Codice Fiscale:
-                            <input type="text" name="cf" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="column">
-                            <input type="submit" name="submit" value="Ricerca" />
-                        </td>
-                    </tr>
-                </form>
-            </table>
-            <div class="column">
-                <form id="readAllForm">
-                    <input type="submit" value="Cerca tutti" name="Mostra tutti" />
-                </form>
-            </div>
-            <br>
-            <br>
-            <div class="divisore">
-                <section class="response"></section>
-            </div>
-        </article>
+
     </main>
     <div class="mask-content"> </div>
 </body>

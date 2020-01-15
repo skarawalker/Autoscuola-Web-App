@@ -7,6 +7,39 @@
     width: 50%;
 }
 
+.bs-ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #116eac;
+}
+
+.bs-li {
+    width: 50%;
+    text-align: center;
+    float: left;
+}
+
+.bs-li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.bs-li:active {
+    background-color: #08324e;
+}
+
+
+/* Change the link color to #111 (black) on hover */
+
+.bs-li a:hover {
+    background-color: #043f66;
+}
+
 .response {
     margin-top: 50px;
 }
@@ -50,7 +83,7 @@ table th {
 
 table thead tr {
     height: 60px;
-    background: #36304a;
+    background: #116eac;
 }
 
 table tbody tr {
@@ -87,7 +120,7 @@ table th.r {
     color: white;
     line-height: 1.2;
     font-weight: unset;
-    background-color: #0e1764;
+    background: #116eac;
 }
 
 tbody tr {

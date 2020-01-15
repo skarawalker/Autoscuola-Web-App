@@ -32,6 +32,9 @@ app.get('/getNextExpirations', User.readPending);
 // Lists all guests
 app.get('/readall', User.readAll);
 
+//List all instructors
+app.get('/getInstructor', User.readIst);
+
 // Search users
 app.get('/search', function(req, res) {
     // contenuto della richiesta
@@ -59,6 +62,38 @@ app.get('/search', function(req, res) {
     });
 });
 
+//Inserimento Guide
+app.post('/guide', function(req, res) {
+    const request = {
+        "nome": null,
+        "cognome": null,
+        "dn": null,
+        "data": null,
+        "ora": null,
+        "durata": null,
+        "istruttore": null
+    };
+    var cf = null;
+    console.log(req.body);
+    res.end();
+    /*if (req.body.nome == null || req.body.cognome == null || req.body.data == null || req.body.ora == null || req.body.istruttore == null) {
+        res.status(500).send('Dato Obbligatorio Mancante!');
+    } else {
+        if (req.body.nome != "") request["nome"] = req.body.nome.toUpperCase();
+        if (req.body.cognome != "") request["cognome"] = req.body.cognome.toUpperCase();
+        if (req.query.dn != "") request["dn"] = req.query.dn.toUpperCase();
+        pool.query("SELECT cod_fis,patente_1 FROM cliente JOIN r1 ON cliente.cod_fis=r1.cliente_1 WHERE cliente.nome=$1::varchar AND cliente.cognome=$2 AND (cliente.data_nascita=$3::date OR $3::varchar IS NULL) AND r1.patente_1=$4::varchar", [request["nome"], request["cognome"], request["dn"]], function(err, result) {
+            if (result.rows != 1) {
+                res.status(500).send('Name Mismatch');
+            } else {
+                cf = result.rows[0].cod_fis;
+            }
+        });
+        pool.query("INSERT INTO guide VALUES ")
+    }*/
+
+});
+
 //Inserimento Utente
 app.post('/ins', function(req, res) {
     const request = {
@@ -71,25 +106,24 @@ app.post('/ins', function(req, res) {
         "telefono": null,
         "email": null,
     };
-    if (req.body.nome1 == null || req.body.cognome1 == null || req.body.dn1 == null || req.body.cf1 == null || req.body.ln1 == null || req.body.telefono1 == null) {
+    if (req.body.nome1 == null || req.body.cognome1 == null || req.body.cf1.length != 16 || req.body.dn1 == null || req.body.cf1 == null || req.body.ln1 == null || req.body.telefono1 == null) {
         res.status(500).send('Dato Obbligatorio Mancante!');
+    } else {
+        if (req.body.nome1 != "") request["nome"] = req.body.nome1.toUpperCase();
+        if (req.body.cognome1 != "") request["cognome"] = req.body.cognome1.toUpperCase();
+        request["cf"] = req.body.cf1.toUpperCase();
+        request["dn"] = req.body.dn1.toUpperCase();
+        request["ln"] = req.body.ln1.toUpperCase();
+        request["telefono"] = req.body.telefono1.toUpperCase();
+        request["email"] = req.body.email1.toUpperCase();
+        pool.query("INSERT INTO cliente (cod_fis, nome, cognome, data_nascita, data_iscrizione, luogo_nascita, telefono, e_mail) VALUES ($1::varchar, $2::varchar, $3::varchar, $4::date, $5::date, $6::varchar, $7::varchar, $8::varchar)", [request["cf"], request["nome"], request["cognome"], request["dn"], request["di"], request["ln"], request["telefono"], request["email"]], function(err, result) {
+            if (err) {
+                console.log(err)
+                res.status(500).send(err)
+            } else
+                res.status(200).send('Utente Inserito!')
+        });
     }
-    if (req.body.nome1 != "") request["nome"] = req.body.nome1.toUpperCase();
-    if (req.body.cognome1 != "") request["cognome"] = req.body.cognome1.toUpperCase();
-    if (req.body.cf1.length != 16) res.status(500).send('Codice Fiscale non valido!');
-    else request["cf"] = req.body.cf1.toUpperCase();
-    request["dn"] = req.body.dn1.toUpperCase();
-    request["ln"] = req.body.ln1.toUpperCase();
-    request["telefono"] = req.body.telefono1.toUpperCase();
-    request["email"] = req.body.email1.toUpperCase();
-    console.log(req.body)
-    pool.query("INSERT INTO cliente (cod_fis, nome, cognome, data_nascita, data_iscrizione, luogo_nascita, telefono, e_mail) VALUES ($1::varchar, $2::varchar, $3::varchar, $4::date, $5::date, $6::varchar, $7::varchar, $8::varchar)", [request["cf"], request["nome"], request["cognome"], request["dn"], request["di"], request["ln"], request["telefono"], request["email"]], function(err, result) {
-        if (err) {
-            console.log(err)
-            res.status(500).send(err)
-        } else
-            res.status(200).send('Utente Inserito!')
-    });
 });
 
 app.listen(8000, function() {

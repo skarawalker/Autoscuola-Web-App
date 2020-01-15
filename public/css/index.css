@@ -21,7 +21,7 @@
     margin-left: 30px;
 }
 
-.nav {
+.l-nav {
     /*  largezza libera, potrai sperimentare */
     width: 320px;
     min-width: 320px;
@@ -34,13 +34,12 @@
     /* spostimo(nscondimo)il panelo rispetto bordo sinistro della pagina  */
     left: -320px;
     /* spazzi interni */
-    padding: 15px 20px;
     /* regoliamo la uscita del panello  */
     -webkit-transition: left 0.3s;
     -moz-transition: left 0.3s;
     transition: left 0.3s;
     /* indichimo il colore dello sfondo del panello */
-    background: #0c1950;
+    background: #116eac;
     /* indichiamo che sara sopra tutti gli altri elementi della pagina  */
     z-index: 2000;
 }
@@ -51,15 +50,13 @@
  * tag <label>
  */
 
-.nav-toggle {
+.l-nav-toggle {
     /* posizionamento assoluto*/
     position: absolute;
     /*  spazio rispetto bordo sinistro del panello  */
     left: 320px;
-    /* rispetto bordo superiore  */
-    top: 1em;
     /* spazzi interni  */
-    padding: 0.5em;
+    padding: 0.77em;
     /* indichimo il colore dllo sfondo del interruttore
      * di solito corrisponde al colore del panello 
     */
@@ -84,7 +81,7 @@
  * simbolo Unicode (TRIGRAM FOR HEAVEN)
 */
 
-.nav-toggle:after {
+.l-nav-toggle:after {
     content: '\2630';
     text-decoration: none;
 }
@@ -92,7 +89,7 @@
 
 /* colore del testo al hover  */
 
-.nav-toggle:hover {
+.l-nav-toggle:hover {
     color: #f4f4f4;
 }
 
@@ -103,7 +100,7 @@
  * nome del selettore del attributo del checkbox
  */
 
-[id='nav-toggle'] {
+[id='l-nav-toggle'] {
     position: absolute;
     display: none;
 }
@@ -114,7 +111,7 @@
  * in caso di dispositivi mobili
  * quando panello aperto si trova al interno del panello */
 
-[id='nav-toggle']:checked~.nav>.nav-toggle {
+[id='l-nav-toggle']:checked~.l-nav>.l-nav-toggle {
     left: auto;
     right: 2px;
     top: 1em;
@@ -126,7 +123,7 @@
  * usiamo pseudo-classe :checked
  */
 
-[id='nav-toggle']:checked~.nav {
+[id='l-nav-toggle']:checked~.l-nav {
     left: 0;
     box-shadow: 4px 0px 20px 0px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 4px 0px 20px 0px rgba(0, 0, 0, 0.5);
@@ -141,7 +138,7 @@
  * non e obbligatorio il trucco, ma puoi sempre usarlo
 */
 
-[id='nav-toggle']:checked~main>article {
+[id='l-nav-toggle']:checked~main>article {
     -webkit-transform: translateX(320px);
     -moz-transform: translateX(320px);
     transform: translateX(320px);
@@ -154,7 +151,7 @@
  * potrai utilizare qualsiasi altro simbolo
 */
 
-[id='nav-toggle']:checked~.nav>.nav-toggle:after {
+[id='l-nav-toggle']:checked~.l-nav>.l-nav-toggle:after {
     content: '\2715';
 }
 
@@ -193,7 +190,7 @@ body {
         margin: 0;
         overflow-x: hidden;
     }
-    .nav {
+    .l-nav {
         width: 100%;
         box-shadow: none
     }
@@ -204,7 +201,8 @@ body {
  * Definiamo lo stile del titolo(logo) del panello  
 */
 
-.nav h2 {
+.l-nav h2 {
+    padding: 15px 20px;
     width: 90%;
     padding: 0;
     margin: 10px 0;
@@ -227,7 +225,7 @@ body {
     -webkit-transition: opacity 0.8s, -webkit-transform 0.8s;
 }
 
-.nav h2 a {
+.l-nav h2 a {
     color: #dadada;
     text-decoration: none;
     text-transform: uppercase;
@@ -236,7 +234,7 @@ body {
 
 /*Uscita morbida del titolo(logo) al apertura del panello  */
 
-[id='nav-toggle']:checked~.nav h2 {
+[id='l-nav-toggle']:checked~.l-nav h2 {
     opacity: 1;
     transform: scale(1, 1);
     -ms-transform: scale(1, 1);
@@ -251,14 +249,16 @@ body {
  * aggiungiamo passaggi morbidi e trasformazioni 
  */
 
-.nav>ul {
+.l-nav>ul {
+    padding: 15px 20px;
     display: block;
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-.nav>ul>li {
+.l-nav>ul>li {
+    padding: 15px 20px;
     line-height: 2.5;
     opacity: 0;
     -webkit-transform: translateX(-50%);
@@ -271,7 +271,7 @@ body {
     transition: opacity .5s .1s, transform .5s .1s;
 }
 
-[id='nav-toggle']:checked~.nav>ul>li {
+[id='l-nav-toggle']:checked~.l-nav>ul>li {
     opacity: 1;
     -webkit-transform: translateX(0);
     -moz-transform: translateX(0);
@@ -282,32 +282,32 @@ body {
 
 /* impostiamo intervalli di apparizone dei voci del menu  */
 
-.nav>ul>li:nth-child(2) {
+.l-nav>ul>li:nth-child(2) {
     -webkit-transition: opacity .5s .2s, -webkit-transform .5s .2s;
     transition: opacity .5s .2s, transform .5s .2s;
 }
 
-.nav>ul>li:nth-child(3) {
+.l-nav>ul>li:nth-child(3) {
     -webkit-transition: opacity .5s .3s, -webkit-transform .5s .3s;
     transition: opacity .5s .3s, transform .5s .3s;
 }
 
-.nav>ul>li:nth-child(4) {
+.l-nav>ul>li:nth-child(4) {
     -webkit-transition: opacity .5s .4s, -webkit-transform .5s .4s;
     transition: opacity .5s .4s, transform .5s .4s;
 }
 
-.nav>ul>li:nth-child(5) {
+.l-nav>ul>li:nth-child(5) {
     -webkit-transition: opacity .5s .5s, -webkit-transform .5s .5s;
     transition: opacity .5s .5s, transform .5s .5s;
 }
 
-.nav>ul>li:nth-child(6) {
+.l-nav>ul>li:nth-child(6) {
     -webkit-transition: opacity .5s .6s, -webkit-transform .5s .6s;
     transition: opacity .5s .6s, transform .5s .6s;
 }
 
-.nav>ul>li:nth-child(7) {
+.l-nav>ul>li:nth-child(7) {
     -webkit-transition: opacity .5s .7s, -webkit-transform .5s .7s;
     transition: opacity .5s .7s, transform .5s .7s;
 }
@@ -317,7 +317,7 @@ body {
  * decoriamo link delle voci del menu 
  */
 
-.nav>ul>li>a {
+.l-nav>ul>li>a {
     display: inline-block;
     position: relative;
     padding: 0;
@@ -338,8 +338,8 @@ body {
  * stato dei link al passaggio del mouse
  */
 
-.nav>ul>li>a:hover,
-.nav>ul>li>a:focus {
+.l-nav>ul>li>a:hover,
+.l-nav>ul>li>a:focus {
     color: white;
     padding-left: 15px;
 }
@@ -349,7 +349,7 @@ body {
  * sottolineatura dei link del menu
  */
 
-.nav>ul>li>a:before {
+.l-nav>ul>li>a:before {
     content: '';
     display: block;
     position: absolute;
@@ -361,7 +361,7 @@ body {
     transition: width 0s ease;
 }
 
-.nav>ul>li>a:after {
+.l-nav>ul>li>a:after {
     content: '';
     display: block;
     position: absolute;
@@ -379,14 +379,14 @@ body {
  * animazione delle linea di sottolineatura al hover 
  */
 
-.nav>ul>li>a:hover:before {
+.l-nav>ul>li>a:hover:before {
     width: 0%;
     background: #0677a3;
     -webkit-transition: width .5s ease;
     transition: width .5s ease;
 }
 
-.nav>ul>li>a:hover:after {
+.l-nav>ul>li>a:hover:after {
     width: 0%;
     background: transparent;
     -webkit-transition: width 0s ease;
@@ -410,7 +410,7 @@ body {
     opacity: 0;
 }
 
-[id='nav-toggle']:checked~.mask-content {
+[id='l-nav-toggle']:checked~.mask-content {
     visibility: visible;
     opacity: 1;
     -webkit-transition: opacity .5s, visibility .5s;

@@ -18,6 +18,15 @@ const User = {
         } catch (error) {
             return res.send(error);
         }
+    },
+    async readIst(req, res) {
+        try {
+            const readAllQuery = 'SELECT * FROM istruttore';
+            const { rows } = await database.query(readAllQuery);
+            return res.send({ rows });
+        } catch (error) {
+            return res.send(error);
+        }
     }
 };
 
