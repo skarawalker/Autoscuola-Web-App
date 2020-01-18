@@ -2,7 +2,7 @@
 <html lang="it">
 
 <head>
-
+    <link rel="stylesheet" type="text/css" href="/public/css/table.css">
     <link rel="stylesheet" type="text/css" href="/public/css/style.css">
     <link rel="stylesheet" type="text/css" href="/public/css/index.css">
     <link rel="stylesheet" type="text/css" href="/public/css/otherpages.css">
@@ -13,61 +13,44 @@
 </head>
 
 <body>
-    <input type="checkbox" id="l-nav-toggle" hidden>
-    <nav class="l-nav">
-        <label for="l-nav-toggle" class="l-nav-toggle" onclick></label>
-        <h2 class="logo">
-            <a>Go Car Home</a>
-        </h2>
-        <ul id="menu">
-            <li><a href="/public/index.html">Home</a></li>
-            <li><a href="/public/user_insert.html">Gestione Iscritti</a></li>
-            <li><a href="/public/guide_insert.html">Prenotazione Guide</a></li>
-            <li><a href="/public/esami.html">Prenotazione esami</a></li>
-            <li><a href="#">Su di noi</a></li>
-        </ul>
-
-    </nav>
-    <ul class="bs-ul">
-        <li class="bs-li" style="float:center-left"><a href="/public/guide_insert.html">Inserimento Guide</a></li>
-        <li class="bs-li" style="float:center-right"><a href="/public/guide_ricerca.html">Gestione Guide</a></li>
-    </ul>
-    <main>
+    <header id="left-side-panel"></header>
+    <header id="top-bootstrap-bar-g"> </header>
+    <main role="main">
         <article>
             <section>
                 <header class="search">
                     <h2>Inserimento Guida</h2>
                 </header>
             </section>
-            <table>
+            <table class="bodytable">
                 <form id="guideForm">
                     <tr>
                         <td class="column">
-                            Nome*:
-                            <input type="text" name="nome" />
+                            <h6>Nome*:</h6>
+                            <input type="text" name="nome" placeholder="Nome" />
                         </td>
                         <td class="column">
-                            Cognome*:
-                            <input type="text" name="cognome" />
+                            <h6>Cognome*:</h6>
+                            <input type="text" name="cognome" placeholder="Cognome" />
                         </td>
                     </tr>
                     <tr>
                         <td class="column">
-                            Data Nascita:
+                            <h6>Data Nascita:</h6>
                             <input type="date" name="dn" />
                         </td>
                         <td class="column">
-                            Patente*:
-                            <input type="text" name="patente" />
+                            <h6>Patente*:</h6>
+                            <input type="text" name="patente" placeholder="AM, B, ..." />
                         </td>
                     </tr>
                     <tr>
                         <td class="column">
-                            Data e Ora*:
+                            <h6>Data e Ora*:</h6>
                             <input type="datetime-local" name="dt" />
                         </td>
                         <td class="column">
-                            Durata*:
+                            <h6>Durata*:</h6>
                             <select name="durata">
                                 <option value="1" selected>Mezz'ora</option>
                                 <option value="2">Un ora</option>
@@ -76,13 +59,13 @@
                     </tr>
                     <tr>
                         <td class="column">
-                            Istruttore*:
+                            <h6>Istruttore*:</h6>
                             <select id="selectBox" name="istruttore">
 
                             </select>
                         </td>
                         <td class="column">
-                            * Campi obbligatori
+                            <h6>* Campi obbligatori</h6>
                         </td>
                     </tr>
                     <tr>
@@ -94,6 +77,7 @@
             </table>
         </article>
     </main>
+    <div class="mask-content"> </div>
 </body>
 
 </html>

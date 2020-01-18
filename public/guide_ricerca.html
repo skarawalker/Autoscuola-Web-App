@@ -2,7 +2,7 @@
 <html lang="it">
 
 <head>
-
+    <link rel="stylesheet" type="text/css" href="/public/css/table.css">
     <link rel="stylesheet" type="text/css" href="/public/css/style.css">
     <link rel="stylesheet" type="text/css" href="/public/css/index.css">
     <link rel="stylesheet" type="text/css" href="/public/css/otherpages.css">
@@ -13,25 +13,8 @@
 </head>
 
 <body>
-    <input type="checkbox" id="l-nav-toggle" hidden>
-    <nav class="l-nav">
-        <label for="l-nav-toggle" class="l-nav-toggle" onclick></label>
-        <h2 class="logo">
-            <a>Go Car Home</a>
-        </h2>
-        <ul id="menu">
-            <li><a href="/public/index.html">Home</a></li>
-            <li><a href="/public/user_insert.html">Gestione Iscritti</a></li>
-            <li><a href="/public/guide_insert.html">Prenotazione Guide</a></li>
-            <li><a href="/public/esami.html">Prenotazione esami</a></li>
-            <li><a href="#">Su di noi</a></li>
-        </ul>
-
-    </nav>
-    <ul class="bs-ul">
-        <li class="bs-li" style="float:center-left"><a href="/public/guide_insert.html">Inserimento Guide</a></li>
-        <li class="bs-li" style="float:center-right"><a href="/public/guide_ricerca.html">Gestione Guide</a></li>
-    </ul>
+    <header id="left-side-panel"></header>
+    <header id="top-bootstrap-bar-g"> </header>
     <main>
         <article>
             <section>
@@ -39,7 +22,7 @@
                     <h2>Ricerca Guida</h2>
                 </header>
             </section>
-            <table>
+            <table class="bodytable">
                 <form id="searchForm">
                     <tr>
                         <td class="column">
@@ -64,7 +47,9 @@
                     </tr>
                 </form>
             </table>
-            <section class="response"></section>
+            <div>
+                <section class="response"></section>
+            </div>
         </article>
     </main>
 </body>

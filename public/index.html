@@ -12,20 +12,13 @@
 </head>
 
 <body>
-    <input type="checkbox" id="l-nav-toggle" hidden>
-    <nav class="l-nav">
-        <label for="l-nav-toggle" class="l-nav-toggle" onclick></label>
-        <h2 class="logo">
-            <a>Go Car Home</a>
-        </h2>
-        <ul id="menu">
-            <li><a href="/public/index.html">Home</a></li>
-            <li><a href="/public/user_insert.html">Gestione Iscritti</a></li>
-            <li><a href="/public/guide_insert.html">Prenotazione Guide</a></li>
-            <li><a href="/public/esami.html">Prenotazione esami</a></li>
-            <li><a href="#">Su di noi</a></li>
-        </ul>
-    </nav>
+    <header id="left-side-panel">
+        <script>
+            $(function() {
+                $('#left-side-panel').load('/public/left-side-panel.html');
+            });
+        </script>
+    </header>
     <main role="main">
         <article>
             <header>
@@ -36,10 +29,16 @@
                 <p>Informazioni per la giornata di oggi</p>
             </footer>
             <div class="row">
-                <div class="columni"></div>
-                <section class="mylist">
-                    <h1>Patenti in scadenza</h1>
-                </section>
+                <div class="columni">
+                    <h2>Patenti in scadenza</h2>
+                    <section id="scadenze">
+                    </section>
+                </div>
+                <div class="columni">
+                    <h2>Guide di Oggi</h2>
+                    <section id="guide">
+                    </section>
+                </div>
             </div>
         </article>
     </main>

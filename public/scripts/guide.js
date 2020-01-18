@@ -1,3 +1,10 @@
+$(function() {
+    $('#left-side-panel').load('left-side-panel.html');
+});
+$(function() {
+    $('#top-bootstrap-bar-g').load('top-bootstrap-bar-g.html');
+});
+
 $.getJSON('http://localhost:8000/getInstructor', function(data) {
     var items = []
     $.each(data.rows, function(i, j) {
@@ -42,12 +49,12 @@ $(function() {
         // avoid to execute the actual submit of the form.
         $.getJSON(`http://localhost:8000/g_search?data=${date}&nome=${nome}&cognome=${cognome}`, function(data) {
             const items = [];
-            items.push("<tr class='table100-head'><th>Data</th><th>Ora</th><th>Istruttore</th><th>Persona</th></tr>");
+            items.push("<tr class='.tr'><th class='.th'>Data</th> <th class='.th'>Ora</th><th class='.th'>Istruttore</th><th class='.th'>Persona</th></tr>");
             $.each(data.rows, function(i, j) {
-                items.push("<tr><td class='column1'>" + new Date(j.date).toLocaleDateString('it-IT') + "</td> " + "<td class = 'column1'> " + j.time + "<td class = 'column1'> " + j.i_name + " " + j.i_surname + " </td> " + " </td> " + "<td class = 'column1' > " + j.name + " " + j.surname + "</td > ");
+                items.push("<tr><td class='.td' >" + new Date(j.date).toLocaleDateString('it-IT') + "</td> " + "<td class='.td' > " + j.time + "<td class='.td' > " + j.i_name + " " + j.i_surname + " </td> " + "<td class='.td' > " + j.name + " " + j.surname + "</td ></tr> ");
             });
             $(".response").empty()
-            const table = $("<table class='table100-head'>", {
+            const table = $("<table class='bodytable'>", {
                 "class": "response"
             })
             table.html(items.join('')).appendTo(".response")

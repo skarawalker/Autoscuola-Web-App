@@ -1,3 +1,22 @@
+// UI loads
+$(function() {
+    $('#left-side-panel').load('/public/left-side-panel.html');
+});
+$(function() {
+    $('#top-bootstrap-bar-u').load('/public/top-bootstrap-bar-u.html');
+});
+
+//options in license select
+$.getJSON('http://localhost:8000/getLicense', function(data) {
+    var items = []
+    $.each(data.rows, function(i, j) {
+        console.log(j);
+        items.push("<option value=" + j.nome_p + ">" + j.nome_p + "</select>");
+    });
+    $("#selectLicense").append(items);
+});
+
+//form di ricerca
 $(function() {
     // Handle search form
     $("#searchForm").submit(function(e) {
@@ -9,14 +28,14 @@ $(function() {
         e.preventDefault(); // avoid to execute the actual submit of the form.
         $.getJSON(`http://localhost:8000/search?nome=${nome}&cognome=${cognome}&dn=${dn}&cf=${cf}`, function(data) {
             const items = [];
-            items.push("<tr class='table100-head'><th class='column1'>Nome</th><th class='column2'>Cognome</th><th class='column3'>Codice Fiscale</th><th class='column4'>Data Nascita</th><th class='column5'>Data Iscrizione</th><th class='column6'>Telefono</th> </tr>");
+            items.push("<tr><th >Nome</th><th>Cognome</th><th>Codice Fiscale</th><th>Data Nascita</th><th>Data Iscrizione</th><th>Telefono</th> </tr>");
             $.each(data.rows, function(i, j) {
                 const dataNascita = new Date(j.data_nascita)
                 const dataIscrizione = new Date(j.data_iscrizione)
-                items.push("<tr><td class='column1'>" + j.nome + "</td> " + "<td class='column2'>" + j.cognome + "</td><td class='column3'>" + j.cod_fis + "</td>" + "<td class='column4'>" + dataNascita.toLocaleDateString('it-IT') + "</td>" + "<td class='column5'>" + dataIscrizione.toLocaleDateString('it-IT') + "</td>" + "<td class='column6'>" + j.telefono + "</td></tr>");
+                items.push("<tr><td>" + j.nome + "</td><td>" + j.cognome + "</td><td>" + j.cod_fis + "</td><td>" + dataNascita.toLocaleDateString('it-IT') + "</td><td>" + dataIscrizione.toLocaleDateString('it-IT') + "</td><td>" + j.telefono + "</td></tr>");
             });
             $(".response").empty()
-            const table = $("<table>", {
+            const table = $("<table class='bodytable'>", {
                 "class": "response"
             })
             table.html(items.join('')).appendTo(".response")
@@ -24,6 +43,32 @@ $(function() {
         return false;
     });
 })
+
+//Aggiornamento valori acconto
+$(function() {
+    // Handle money form
+    $("#accontiForm").submit(function(e) {
+        const nome2 = $('input[name=nome2]').val()
+        const cognome2 = $('input[name=cognome2]').val()
+        const cf2 = $('input[name=cf2]').val()
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+        $.getJSON(`http://localhost:8000/acconti?nome2=${nome2}&cognome2=${cognome2}&cf2=${cf2}`, function(data) {
+            const items = [];
+            items.push("<form id='upd_acconti'><tr><th >Nome</th><th>Cognome</th><th>Patente</th><th>Acconto1</th><th>Acconto2</th> </tr>");
+            $.each(data.rows, function(i, j) {
+                console.log(j)
+                items.push("<tr><td>" + j.nome + "</td><td>" + j.cognome + "</td><td>" + j.patente_1 + "</td><td><input type='textbox' name='acc1' placeholder ='" + j.acconto1 + "/" + j.costo1 + "'/></td><td><input type='textbox' name='acc2' placeholder ='" + j.acconto2 + "/" + j.costo2 + "'/>" + "</td><td><input type = 'submit' value = 'Modifica' / > </td></tr > ");
+            });
+            items.push("</form>")
+            $("#risposta").empty()
+            const table = $("<table>", {
+                "class": "bodytable"
+            })
+            table.html(items.join('')).appendTo("#risposta")
+        });
+    });
+    return false;
+});
 
 $(function() {
     // Handle search form
@@ -55,7 +100,7 @@ $(function() {
                 items.push("<tr><td class='column1'>" + j.nome + "</td> " + "<td class='column2'>" + j.cognome + "</td><td class='column3'>" + j.cod_fis + "</td>" + "<td class='column4'>" + dataNascita.toLocaleDateString('it-IT') + "</td>" + "<td class='column5'>" + dataIscrizione.toLocaleDateString('it-IT') + "</td>" + "<td class='column6'>" + j.telefono + "</td></tr>");
             });
             $(".response").empty()
-            const table = $("<table class='t'>", {
+            const table = $("<table class='bodytable'>", {
                 "class": "response"
             });
             table.html(items.join('')).appendTo(".response")

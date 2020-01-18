@@ -35,6 +35,29 @@ app.get('/readall', User.readAll);
 //List all instructors
 app.get('/getInstructor', User.readIst);
 
+//Get all licenses
+app.get('/getLicense', function(req, res) {
+    pool.query("SELECT * FROM patente", function(err, result) {
+        if (err) {
+            res.status(500).send(err.message)
+        } else {
+            res.send(result)
+        }
+    });
+});
+
+//Get todays driving lessons
+app.get('/getGuideOggi', function(req, res) {
+    const date = new Date()
+    pool.query("SELECT * FROM guida JOIN cliente ON guida.cliente_g = cliente.cod_fis WHERE guida.data_guida = $1 ", [date], function(err, result) {
+        if (err) {
+            console.log(err.message)
+            res.status(500).send(err.message)
+        } else {
+            res.send(result)
+        }
+    });
+});
 // Search users
 app.get('/search', function(req, res) {
     // contenuto della richiesta
@@ -141,8 +164,10 @@ app.post('/ins', function(req, res) {
         "di": new Date().toDateString(),
         "telefono": null,
         "email": null,
+        "patente": null
     };
-    if (req.body.nome1 == null || req.body.cognome1 == null || req.body.cf1.length != 16 || req.body.dn1 == null || req.body.cf1 == null || req.body.ln1 == null || req.body.telefono1 == null) {
+
+    if (req.body.nome1 == null || req.body.cognome1 == null || req.body.cf1.length != 16 || req.body.dn1 == null || req.body.cf1 == null || req.body.patente == null || req.body.ln1 == null || req.body.telefono1 == null) {
         res.status(500).send('Dato Obbligatorio Mancante!');
     } else {
         if (req.body.nome1 != "") request["nome"] = req.body.nome1.toUpperCase();
@@ -152,13 +177,42 @@ app.post('/ins', function(req, res) {
         request["ln"] = req.body.ln1.toUpperCase();
         request["telefono"] = req.body.telefono1.toUpperCase();
         request["email"] = req.body.email1.toUpperCase();
+        request["patente"] = req.body.patente.toUpperCase();
+        console.log(request["patente"])
         pool.query("INSERT INTO cliente (cod_fis, nome, cognome, data_nascita, data_iscrizione, luogo_nascita, telefono, e_mail) VALUES ($1::varchar, $2::varchar, $3::varchar, $4::date, $5::date, $6::varchar, $7::varchar, $8::varchar)", [request["cf"], request["nome"], request["cognome"], request["dn"], request["di"], request["ln"], request["telefono"], request["email"]], function(err, result) {
-            if (err) {
-                res.status(500).send(err.message)
-            } else
-                res.status(200).send('Utente Inserito!')
+            pool.query("INSERT INTO r1 VALUES (0,0, $1::varchar, $2::varchar)", [request["patente"], request["cf"]], function(err1, res1) {
+                if (err) {
+                    res.status(500).send(err.message)
+                } else if (err1) {
+                    res.status(500).send(err1.message)
+                } else
+                    res.status(200).send('Utente inserito con successo!')
+            });
+
         });
     }
+});
+
+//Modifica Acconti
+app.get('/acconti', function(req, res) {
+    const request = {
+        "nome": null,
+        "cognome": null,
+        "cf": null,
+    }
+    if (req.query.nome2 != null) request["nome"] = req.query.nome2.toUpperCase();
+    if (req.query.cognome2 != null) request["cognome"] = req.query.cognome2.toUpperCase();
+    if (req.query.cf2 != null) request["cf"] = req.query.cf2.toUpperCase();
+    console.log(req.query)
+    pool.query("SELECT * FROM CLIENTE JOIN R1 ON cliente.cod_fis = r1.cliente_1 JOIN PATENTE ON r1.patente_1 = patente.nome_p WHERE (cliente.nome= $1 OR $1 IS NULL) AND (cliente.cognome = $2 OR $2='')  AND ( cliente.cod_fis= $3 OR $3='')", [request["nome"], request["cognome"], request["cf"]], function(err, result) {
+        if (err) {
+            console.log(err.message)
+            res.status(500).send(err.message)
+        } else {
+            console.log(result)
+            res.json(result)
+        }
+    })
 });
 
 app.listen(8000, function() {

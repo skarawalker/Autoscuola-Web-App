@@ -2,7 +2,7 @@
 <html lang="it">
 
 <head>
-
+    <link rel="stylesheet" type="text/css" href="/public/css/table.css">
     <link rel="stylesheet" type="text/css" href="/public/css/style.css">
     <link rel="stylesheet" type="text/css" href="/public/css/index.css">
     <link rel="stylesheet" type="text/css" href="/public/css/otherpages.css">
@@ -13,29 +13,8 @@
 </head>
 
 <body>
-    <input type="checkbox" id="l-nav-toggle" hidden>
-    <nav class="l-nav">
-        <label for="l-nav-toggle" class="l-nav-toggle" onclick></label>
-        <h2 class="logo">
-            <a>Go Car Home</a>
-        </h2>
-        <ul id="menu">
-            <li><a href="/public/index.html">Home</a></li>
-            <li><a href="/public/user_manag.html">Gestione Iscritti</a></li>
-            <li><a href="/public/guide_insert.html">Prenotazione Guide</a></li>
-            <li><a href="/public/esami.html">Prenotazione esami</a></li>
-            <li><a href="#">Su di noi</a></li>
-        </ul>
-
-    </nav>
-    <ul class="bs-ul">
-        <li class="bs-li" style="float:center-left">
-            <a href="/public/user_insert.html">Inserimento Utente</a>
-        </li>
-        <li class="bs-li" style="float:center-right">
-            <a href="/public/user_search.html">Ricerca Utente</a>
-        </li>
-    </ul>
+    <header id="left-side-panel"></header>
+    <header id="top-bootstrap-bar-u"></header>
     <main role="main">
         <article>
             <section>
@@ -43,7 +22,7 @@
                     <h2>Nuovo Utente</h2>
                 </header>
             </section>
-            <table>
+            <table class="bodytable">
                 <form id="insertForm">
                     <tr>
                         <td class="column">
@@ -80,7 +59,10 @@
                             <h6>E-mail:</h6>
                             <input type="text" name="email1" placeholder="example@example.boh" />
                         </td>
-                        <td></td>
+                        <td class="column">
+                            <h6>Patente:*</h6>
+                            <select id="selectLicense" name="patente"></select>
+                        </td>
                     </tr>
                     <tr>
                         <td class="column">
@@ -90,11 +72,44 @@
                             <h6>* Campi Obbligatori</h6>
                         </td>
                     </tr>
-
                 </form>
             </table>
         </article>
-
+        <article>
+            <section>
+                <header class="search">
+                    <h2>Gestione Acconti</h2>
+                </header>
+            </section>
+            <table class="bodytable">
+                <form id="accontiForm">
+                    <tr>
+                        <td class="column">
+                            <h6>Nome:</h6>
+                            <input type="text" name="nome2" placeholder="Nome" />
+                        </td>
+                        <td class="column">
+                            <h6>Cognome:</h6>
+                            <input type="text" name="cognome2" placeholder="Cognome" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="column">
+                            <h6>Codice Fiscale:</h6>
+                            <input type="text" name="cf2" placeholder="Codice Fiscale" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="column">
+                            <input type="submit" name="submit2" value="Trova" />
+                        </td>
+                    </tr>
+                </form>
+            </table>
+            <div class="divisore" style="margin-top: 20px;">
+                <section id="risposta"></section>
+            </div>
+        </article>
     </main>
     <div class="mask-content"> </div>
 </body>
