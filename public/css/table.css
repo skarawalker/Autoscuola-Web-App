@@ -54,15 +54,30 @@ td {
     padding: 1em;
     background: rgb(191, 191, 196);
     border-radius: 7px;
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
 .bodytable td,
-th,
+.bodytable th,
 tr {
-    width: auto;
+    width: 50%;
     margin: 10 10 10 10;
     text-align: left;
     text-transform: uppercase;
+}
+
+.bodytable th {
+    font-weight: bold;
+}
+
+.result {
+    border-radius: 7px;
+    background-color: white;
+}
+
+.bodytable input[type="textbox"] {
+    color: black;
 }
 
 

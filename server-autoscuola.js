@@ -76,7 +76,6 @@ app.get('/search', function(req, res) {
     if (req.query.cognome != "") request["cognome"] = req.query.cognome.toUpperCase();
     if (req.query.dn != "") request["dn"] = req.query.dn.toUpperCase();
     if (req.query.cf != "") request["cf"] = req.query.cf.toUpperCase();
-    console.log(req.query)
     pool.query("SELECT * FROM cliente WHERE (nome=$1::varchar OR $1::varchar IS NULL) AND (cognome=$2::varchar OR $2::varchar IS NULL) AND (data_nascita=$3::date OR $3::DATE is null) AND (cod_fis=$4::char OR $4::char IS NULL)", [request["nome"], request["cognome"], request["dn"], request["cf"]], function(err, result) {
         if (err) {
             console.error(err)
@@ -97,7 +96,6 @@ app.post('/guide', function(req, res) {
         "durata": null,
         "istruttore": null
     };
-    console.log(req.body)
     var cf = null;
     const costo_mezzora = 20; //quasy dato query 3
     if (req.body.nome == "" || req.body.cognome == "" || req.body.patente == "" || req.body.dt == "" || req.body.istruttore == "") {
@@ -193,7 +191,7 @@ app.post('/ins', function(req, res) {
     }
 });
 
-//Modifica Acconti
+//Richiesta Acconti
 app.get('/acconti', function(req, res) {
     const request = {
         "nome": null,
@@ -203,16 +201,39 @@ app.get('/acconti', function(req, res) {
     if (req.query.nome2 != null) request["nome"] = req.query.nome2.toUpperCase();
     if (req.query.cognome2 != null) request["cognome"] = req.query.cognome2.toUpperCase();
     if (req.query.cf2 != null) request["cf"] = req.query.cf2.toUpperCase();
-    console.log(req.query)
     pool.query("SELECT * FROM CLIENTE JOIN R1 ON cliente.cod_fis = r1.cliente_1 JOIN PATENTE ON r1.patente_1 = patente.nome_p WHERE (cliente.nome= $1 OR $1 IS NULL) AND (cliente.cognome = $2 OR $2='')  AND ( cliente.cod_fis= $3 OR $3='')", [request["nome"], request["cognome"], request["cf"]], function(err, result) {
         if (err) {
             console.log(err.message)
             res.status(500).send(err.message)
         } else {
-            console.log(result)
             res.json(result)
         }
     })
+});
+
+//Modifica Acconti
+app.post("/acc_mod", function(req, res) {
+    request = {
+        "cod_fis": null,
+        "patente": null,
+        "acc1_new": null,
+        "acc2_new": null
+    }
+    if (req.body.acc1 == null || req.body.acc1 == '') request["acc1_new"] = req.body.acconto1
+    else request["acc1_new"] = req.body.acc1
+    if (req.body.acc2 == null || req.body.acc2 == '') request["acc2_new"] = req.body.acconto2
+    else request["acc2_new"] = req.body.acc2
+    request["cod_fis"] = req.body.cod_fis
+    request["patente"] = req.body.patente_1
+    console.log(request)
+    pool.query("UPDATE r1  SET acconto1 = $1::float, acconto2= $2::float WHERE patente_1 = $3::varchar AND cliente_1 = $4::varchar", [request["acc1_new"], request["acc2_new"], request["patente"], request["cod_fis"]], function(err, result) {
+        if (err) {
+            console.log(err.message)
+            res.status(500).send(err.message)
+        } else {
+            res.status(200).send('Acconto aggiornato!')
+        }
+    });
 });
 
 app.listen(8000, function() {

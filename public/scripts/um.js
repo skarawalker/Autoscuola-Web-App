@@ -10,7 +10,6 @@ $(function() {
 $.getJSON('http://localhost:8000/getLicense', function(data) {
     var items = []
     $.each(data.rows, function(i, j) {
-        console.log(j);
         items.push("<option value=" + j.nome_p + ">" + j.nome_p + "</select>");
     });
     $("#selectLicense").append(items);
@@ -24,7 +23,6 @@ $(function() {
         const cognome = $('input[name=cognome]').val()
         const dn = $('input[name=dn]').val()
         const cf = $('input[name=cf]').val()
-
         e.preventDefault(); // avoid to execute the actual submit of the form.
         $.getJSON(`http://localhost:8000/search?nome=${nome}&cognome=${cognome}&dn=${dn}&cf=${cf}`, function(data) {
             const items = [];
@@ -32,7 +30,7 @@ $(function() {
             $.each(data.rows, function(i, j) {
                 const dataNascita = new Date(j.data_nascita)
                 const dataIscrizione = new Date(j.data_iscrizione)
-                items.push("<tr><td>" + j.nome + "</td><td>" + j.cognome + "</td><td>" + j.cod_fis + "</td><td>" + dataNascita.toLocaleDateString('it-IT') + "</td><td>" + dataIscrizione.toLocaleDateString('it-IT') + "</td><td>" + j.telefono + "</td></tr>");
+                items.push("<tr class='result'><td>" + j.nome + "</td><td>" + j.cognome + "</td><td>" + j.cod_fis + "</td><td>" + dataNascita.toLocaleDateString('it-IT') + "</td><td>" + dataIscrizione.toLocaleDateString('it-IT') + "</td><td>" + j.telefono + "</td></tr>");
             });
             $(".response").empty()
             const table = $("<table class='bodytable'>", {
@@ -51,18 +49,17 @@ $(function() {
         const nome2 = $('input[name=nome2]').val()
         const cognome2 = $('input[name=cognome2]').val()
         const cf2 = $('input[name=cf2]').val()
-        e.preventDefault(); // avoid to execute the actual submit of the form.
+        e.preventDefault()
         $.getJSON(`http://localhost:8000/acconti?nome2=${nome2}&cognome2=${cognome2}&cf2=${cf2}`, function(data) {
             const items = [];
-            items.push("<form id='upd_acconti'><tr><th >Nome</th><th>Cognome</th><th>Patente</th><th>Acconto1</th><th>Acconto2</th> </tr>");
+            items.push("<tr class='res-header'><th >Nome</th><th>Cognome</th><th>Patente </th><th style='text-align:right'>Acconto1</th><th style='text-align:right'>Acconto2</th> </tr>");
             $.each(data.rows, function(i, j) {
-                console.log(j)
-                items.push("<tr><td>" + j.nome + "</td><td>" + j.cognome + "</td><td>" + j.patente_1 + "</td><td><input type='textbox' name='acc1' placeholder ='" + j.acconto1 + "/" + j.costo1 + "'/></td><td><input type='textbox' name='acc2' placeholder ='" + j.acconto2 + "/" + j.costo2 + "'/>" + "</td><td><input type = 'submit' value = 'Modifica' / > </td></tr > ");
+                items.push("<tr class='result'><td>" + j.nome + "</td><td>" + j.cognome + "</td><td>" + j.patente_1 + "</td><td><input style='text-align:right' type='textbox' name='acc1' placeholder ='" + j.acconto1 + "€ / " + j.costo1 + "€'/></td><td><input style='text-align:right' type='textbox' name='acc2' placeholder ='" + j.acconto2 + "€ / " + j.costo2 + "€'/>" + "</td><td><input name='cod_fis' type='hidden' value='" + j.cod_fis + "'></input><input type='hidden' name='patente_1' value='" + j.patente_1 + "'></input><input type='hidden' name='acconto1' value='" + j.acconto1 + "'></input><input type='hidden' name='acconto2' value='" + j.acconto2 + "'></input><input type = 'submit' name='submit' value ='Modifica'> </td></tr > ");
             });
-            items.push("</form>")
             $("#risposta").empty()
             const table = $("<table>", {
-                "class": "bodytable"
+                "class": "bodytable",
+                "style": "align-self: center"
             })
             table.html(items.join('')).appendTo("#risposta")
         });
@@ -70,6 +67,23 @@ $(function() {
     return false;
 });
 
+//
+$(function() {
+    $('#upd_acconti').submit(function(e) {
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+        $.ajax({
+            url: '/acc_mod',
+            type: 'post',
+            data: $("#upd_acconti").serialize(),
+            success: function(data) {
+                alert("Acconti modificati!")
+            },
+            error: function(e) {
+                alert(e.responseText)
+            }
+        });
+    });
+});
 $(function() {
     // Handle search form
     $("#insertForm").submit(function(e) {
@@ -93,7 +107,7 @@ $(function() {
         e.preventDefault()
         $.getJSON(`http://localhost:8000/readall`, function(data) {
             const items = [];
-            items.push("<tr class='table100-head'><th class='column1'>Nome</th><th class='column2'>Cognome</th><th class='column3'>Codice Fiscale</th><th class='column4'>Data Nascita</th><th class='column5'>Data Iscrizione</th><th class='column6'>Telefono</th> </tr>");
+            items.push("<tr class='res-header'><th class='column1'>Nome</th><th class='column2'>Cognome</th><th class='column3'>Codice Fiscale</th><th class='column4'>Data Nascita</th><th class='column5'>Data Iscrizione</th><th class='column6'>Telefono</th> </tr>");
             $.each(data.rows, function(i, j) {
                 const dataNascita = new Date(j.data_nascita)
                 const dataIscrizione = new Date(j.data_iscrizione)

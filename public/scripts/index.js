@@ -12,7 +12,7 @@ $.getJSON('http://localhost:8000/getNextExpirations', function(data) {
 });
 $.getJSON('http://localhost:8000/getGuideOggi', function(data) {
     var items = []
-    items.push("<tr><th style='text-align:left'>Nome</th><th style='text-align:left'>Cognome</th><th style='text-align:left'>Patente</th> <th style='text-align:left'>Ora</th><th style='text-align:left'>Durata(min)</th></tr>");
+    items.push("<tr><th style='text-align:left'>Nome</th><th style='text-align:left'>Cognome</th><th style='text-align:left'>Patente </th> <th style='text-align:left'>Ora</th><th style='text-align:left'>Durata(min)</th></tr>");
     $.each(data.rows, function(i, j) {
         const dataScadenza = new Date(j.data_scadenza)
         items.push("<tr><td>" + j.nome + "</td> " + "<td>" + j.cognome + "</td><td>" + j.patente_g + "</td>" + j.ora + "</td>" + j.durata + "</td></tr>");
