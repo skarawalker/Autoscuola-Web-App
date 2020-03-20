@@ -2,6 +2,7 @@ const database = require('./dbmanag');
 
 const User = {
     async readPending(req, res) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
         try {
             const readPendingQuery = 'SELECT nome,cognome,data_scadenza FROM cliente JOIN r2 ON cliente.cod_fis=r2.cliente_2 ORDER BY data_scadenza LIMIT 10';
             const { rows } = await database.query(readPendingQuery);
@@ -11,6 +12,7 @@ const User = {
         }
     },
     async readAll(req, res) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
         try {
             const readAllQuery = 'SELECT * FROM cliente ORDER BY cognome';
             const { rows } = await database.query(readAllQuery);
@@ -20,6 +22,7 @@ const User = {
         }
     },
     async readIst(req, res) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
         try {
             const readAllQuery = 'SELECT * FROM istruttore';
             const { rows } = await database.query(readAllQuery);

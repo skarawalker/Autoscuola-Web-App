@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/public/css/table.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/otherpages.css">
+    <script type="text/javascript" src="/jquery.min.js"></script>
+    <script type="text/javascript" src="/public/scripts/esami.js"></script>
+    <title>Gestione Autoscuola</title>
+    <link rel='shortcut icon' type='image/x-icon' href='/public/images/favicon.ico' />
+</head>
+
+<body>
+    <header id="left-side-panel"></header>
+    <header id="top-bootstrap-bar-e"> </header>
+    <main>
+        <article>
+            <section>
+                <header class="search">
+                    <h2>Ricerca Guida</h2>
+                </header>
+            </section>
+            <table class="bodytable">
+                <form id="searchForm">
+                    <tr>
+                        <td class="column">
+                            Nome:
+                            <input type="text" name="nome" />
+                        </td>
+                        <td class="column">
+                            Cognome:
+                            <input type="text" name="cognome" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="column">
+                            Data:
+                            <input type="date" name="data" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="column">
+                            <input type="submit" name="submit" value="Cerca" />
+                        </td>
+                    </tr>
+                </form>
+            </table>
+            <div>
+                <section class="response"></section>
+            </div>
+        </article>
+    </main>
+</body>
+
+</html>

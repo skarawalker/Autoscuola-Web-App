@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/public/css/table.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/otherpages.css">
+    <script type="text/javascript" src="/jquery.min.js"></script>
+    <script type="text/javascript" src="/public/scripts/esami.js"></script>
+    <title>Gestione Autoscuola</title>
+    <link rel='shortcut icon' type='image/x-icon' href='/public/images/favicon.ico' />
+</head>
+
+<body>
+    <header id="left-side-panel"></header>
+    <header id="top-bootstrap-bar-e"> </header>
+    <main role="main">
+        <article>
+            <section>
+                <header class="search">
+                    <h2>Inserimento Esame</h2>
+                </header>
+            </section>
+            <table class="bodytable">
+                <form id="guideForm">
+                    <tr>
+                        <td class="column">
+                            <h6>Nome*:</h6>
+                            <input type="text" name="nome" placeholder="Nome" />
+                        </td>
+                        <td class="column">
+                            <h6>Cognome*:</h6>
+                            <input type="text" name="cognome" placeholder="Cognome" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="column">
+                            <h6>Data Nascita:</h6>
+                            <input type="date" name="dn" />
+                        </td>
+                        <td class="column">
+                            <h6>Patente*:</h6>
+                            <input type="text" name="patente" placeholder="AM, B, ..." />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="column">
+                            <h6>Data e Ora*:</h6>
+                            <input type="datetime-local" name="dt" />
+                        </td>
+                        <td class="column">
+                        </td>
+                        <td class="column">
+                            <h6>Tipo esame*:</h6>
+                            <select name="tipo">
+                                <option value="teoria" selected>Esame Teorico</option>
+                                <option value="pratica">Esame Pratico</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="column">
+                            <input type="submit" name="submit" value="Inserisci" />
+                        </td>
+                        <td class="column">
+                            <h6>* Campi obbligatori</h6>
+                        </td>
+                    </tr>
+                </form>
+            </table>
+        </article>
+    </main>
+    <div class="mask-content"> </div>
+</body>
+
+</html>

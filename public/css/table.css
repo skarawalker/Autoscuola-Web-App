@@ -52,32 +52,20 @@ td {
 
 .bodytable {
     padding: 1em;
-    background: rgb(191, 191, 196);
+    background: #2080C0;
     border-radius: 7px;
-    border-collapse: separate;
-    border-spacing: 0;
+}
+.bodytable td{
+    width: 50%;
+    position: relative;
 }
 
-.bodytable td,
-.bodytable th,
+th,
 tr {
-    width: 50%;
+    width: auto;
     margin: 10 10 10 10;
     text-align: left;
     text-transform: uppercase;
-}
-
-.bodytable th {
-    font-weight: bold;
-}
-
-.result {
-    border-radius: 7px;
-    background-color: white;
-}
-
-.bodytable input[type="textbox"] {
-    color: black;
 }
 
 
@@ -131,4 +119,10 @@ section {
 
  ::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.bodytable h6{
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.25em;
 }

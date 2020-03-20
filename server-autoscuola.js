@@ -45,6 +45,7 @@ app.get('/getInstructor', User.readIst);
 
 //Get all licenses
 app.get('/getLicense', function(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     pool.query("SELECT * FROM patente", function(err, result) {
         if (err) {
             res.status(500).send(err.message)
@@ -56,6 +57,7 @@ app.get('/getLicense', function(req, res) {
 
 //Get todays driving lessons
 app.get('/getGuideOggi', function(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     const date = new Date()
     pool.query("SELECT * FROM guida JOIN cliente ON guida.cliente_g = cliente.cod_fis WHERE guida.data_guida = $1 ", [date], function(err, result) {
         if (err) {
@@ -68,6 +70,7 @@ app.get('/getGuideOggi', function(req, res) {
 });
 // Search users
 app.get('/search', function(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     // contenuto della richiesta
     const request = {
         "nome": null,
@@ -94,6 +97,7 @@ app.get('/search', function(req, res) {
 
 //Inserimento Guide
 app.post('/guide', function(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     const request = {
         "nome": null,
         "cognome": null,
@@ -140,6 +144,7 @@ app.post('/guide', function(req, res) {
 
 //Ricerca Guide
 app.get('/g_search', function(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     const request = {
         "nome": null,
         "cognome": null,
@@ -161,6 +166,7 @@ app.get('/g_search', function(req, res) {
 
 //Inserimento Utente
 app.post('/ins', function(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     const request = {
         "nome": null,
         "cognome": null,
@@ -201,6 +207,7 @@ app.post('/ins', function(req, res) {
 
 //Richiesta Acconti
 app.get('/acconti', function(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     const request = {
         "nome": null,
         "cognome": null,
@@ -221,6 +228,7 @@ app.get('/acconti', function(req, res) {
 
 //Modifica Acconti
 app.post("/acc_mod", function(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     request = {
         "cod_fis": null,
         "patente": null,

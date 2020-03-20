@@ -35,7 +35,7 @@
     -moz-transition: left 0.3s;
     transition: left 0.3s;
     /* indichimo il colore dello sfondo del panello */
-    background: #116eac;
+    background: #2080C0;
     /* indichiamo che sara sopra tutti gli altri elementi della pagina  */
     z-index: 2000;
 }
@@ -52,8 +52,20 @@
     /*  spazio rispetto bordo sinistro del panello  */
     left: 320px;
     /* spazzi interni  */
-    padding: 6%;
-    height: 6%;
+    padding: 1em;
+    padding-top: 1.5em;
+    padding-bottom: 2.5em;
+
+    /*margini superiore e sinistro*/
+    margin-top: 0.15em;
+    margin-left: 0.25em;
+    
+    /* prova back ground circolare */
+    width: 4em;
+    height: 4%; 
+   -moz-border-radius: 1em; 
+   -webkit-border-radius: 1em; 
+   border-radius: 2em;
     /* indichimo il colore dllo sfondo del interruttore
      * di solito corrisponde al colore del panello 
     */
@@ -81,6 +93,20 @@
 .l-nav-toggle:after {
     content: '\2630';
     text-decoration: none;
+    
+    /* css nuovo*/
+    
+	cursor: default;
+	height: 100vh;
+	left: 0;
+	overflow-x: hidden;
+	overflow-y: auto;
+	/*position: fixed;*/
+	text-align: right;
+	top: 0;
+	width: 18em;
+	z-index: 10000;
+
 }
 
 
@@ -159,7 +185,10 @@
  */
 
 body {
-    -webkit-animation: bugfix infinite 1s;
+    -webkit-animation: bugfix infinite 1s;    
+    background-image: url(../images/backgroundcar.jpg) !important ; 
+    background-attachment: fixed;
+    background-position: center center;
 }
 
 @-webkit-keyframes bugfix {
