@@ -16,6 +16,14 @@ $.getJSON('http://localhost:8000/getInstructor', function(data) {
     $("#selectBox").append(items);
 });
 
+$.getJSON('http://localhost:8000/getLicense', function(data) {
+    var items = []
+    $.each(data.rows, function(i, j) {
+        items.push("<option value=" + j.nome_p + ">" + j.nome_p + "</select>");
+    });
+    $("#selectLicense").append(items);
+});
+
 $(function() {
     // Handle search form
     $("#guideForm").submit(function(e) {
