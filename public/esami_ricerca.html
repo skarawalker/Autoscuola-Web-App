@@ -19,25 +19,32 @@
         <article>
             <section>
                 <header class="search">
-                    <h2>Ricerca Guida</h2>
+                    <h2>Ricerca Esami</h2>
                 </header>
             </section>
             <table class="bodytable">
                 <form id="searchForm">
                     <tr>
                         <td class="column">
-                            <h6>Nome:</h6>
-                            <input type="text" name="nome" placeholder="Nome"  />
+                            <h6>Codice Fiscale:</h6>
+                            <input type="text" name="codfis" placeholder="Codice Fiscale"  />
                         </td>
                         <td class="column">
-                            <h6>Cognome:</h6>
-                            <input type="text" name="cognome" placeholder="Cognome" />
+                            <h6>Patente:</h6>
+                            <input type="text" name="patente" placeholder="Patente" />
                         </td>
                     </tr>
                     <tr>
                         <td class="column">
                             <h6>Data:</h6>
                             <input type="date" name="data" />
+                        </td>
+                        <td class="column">
+                            <h6>Tipo esame:</h6>
+                            <select name="tipo">
+                                <option value="teorico" selected>Teoria</option>
+                                <option value="pratico">Pratica</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
@@ -49,6 +56,15 @@
             </table>
             <div>
                 <section class="response"></section>
+            </div>
+            <!--<table class="bodytable">
+                <form id="domandeLista">
+                    <input type="hidden" value="15" name="esame"></hidden>
+                    <input type="submit" name="submit" value="Vedi domande">
+                </form>
+            </table>-->
+            <div>
+                <section class="domande"></section>
             </div>
         </article>
     </main>

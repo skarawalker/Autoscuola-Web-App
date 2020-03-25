@@ -13,27 +13,16 @@ $.getJSON('http://localhost:8000/getLicense', function(data) {
     $("#selectLicense").append(items);
 });
 
-$.getJSON('http://localhost:8000/getInstructor', function(data) {
-    var items = []
-    $.each(data.rows, function(i, j) {
-        console.log(j);
-        items.push("<option value=" + j.cf + ">" + j.nome + " " +
-            j.cognome + "</option>");
-    });
-
-    $("#selectBox").append(items);
-});
-
 $(function() {
     // Handle search form
-    $("#guideForm").submit(function(e) {
+    $("#esamiForm").submit(function(e) {
         e.preventDefault(); // avoid to execute the actual submit of the form.
         $.ajax({
-            url: '/guide',
+            url: '/esami',
             type: 'post',
-            data: $("#guideForm").serialize(),
+            data: $("#esamiForm").serialize(),
             success: function(data) {
-                alert("Guida Inserita")
+                alert("Esame Inserito")
             },
             error: function(e) {
                 alert(e.responseText)
@@ -45,9 +34,10 @@ $(function() {
 $(function() {
     // Handle search form
     $("#searchForm").submit(function(e) {
-        const nome = $('input[name=nome]').val()
-        const cognome = $('input[name=cognome]').val()
+        const codfis = $('input[name=codfis]').val()
+        const patente = $('input[name=patente]').val()
         const date = $('input[name=data]').val()
+        const tipo = $('select[name=tipo]').val()
         e.preventDefault();
         $.ajax({
             error: function(err) {
@@ -55,17 +45,46 @@ $(function() {
             }
         });
         // avoid to execute the actual submit of the form.
-        $.getJSON(`http://localhost:8000/g_search?data=${date}&nome=${nome}&cognome=${cognome}`, function(data) {
+        $.getJSON(`http://localhost:8000/e_search?data=${date}&codfis=${codfis}&patente=${patente}&tipo=${tipo}`, function(data) {
             const items = [];
-            items.push("<tr class='.tr'><th class='.th'>Data</th> <th class='.th'>Ora</th><th class='.th'>Istruttore</th><th class='.th'>Persona</th></tr>");
+            items.push("<tr class='.tr'><th class='.th'>Nome</th> <th class='.th'>Cognome</th><th class='.th'>Data</th><th class='.th'>Patente</th><th class='.th'>Tipo</th><th class='.th'>Domande</th></tr>");
             $.each(data.rows, function(i, j) {
-                items.push("<tr><td class='.td' >" + new Date(j.date).toLocaleDateString('it-IT') + "</td> " + "<td class='.td' > " + j.time + "<td class='.td' > " + j.i_name + " " + j.i_surname + " </td> " + "<td class='.td' > " + j.name + " " + j.surname + "</td ></tr> ");
+                items.push("<tr><td class='.td' >"+j.name+"</td>"+"<td class='.td' > " + j.surname + "</td >"+"<td class='.td' >" + new Date(j.date).toLocaleDateString('it-IT') + "</td> " + "<td class='.td' > " + j.license + "<td class='.td' > " + j.type + "</td> " + 
+                "<td class='.td' > " + "<button onclick='window.location.href()'>"+"</td></tr> ");
             });
             $(".response").empty()
             const table = $("<table class='bodytable'>", {
                 "class": "response"
             })
             table.html(items.join('')).appendTo(".response")
+        });
+        return false;
+    });
+})
+
+// form per le domande
+$(function() {
+    // Handle search form
+    $("#domandeLista").submit(function(e) {
+        const esame = $('input[name=esame]').val()
+        e.preventDefault();
+        $.ajax({
+            error: function(err) {
+                alert(err.responseText)
+            }
+        });
+        // avoid to execute the actual submit of the form.
+        $.getJSON(`http://localhost:8000/domande?esame=${esame}`, function(data) {
+            const items = [];
+            items.push("<tr class='.tr'><th class='.th'>Domanda</th> <th class='.th'>Risposta Corretta</th><th class='.th'>Risposta Data</th></tr>");
+            $.each(data.rows, function(i, j) {
+                items.push("<tr><td class='.td' >"+j.text+"</td>"+"<td class='.td' > " + j.answer + "</td >"+"<td class='.td' >" + j.canswer + "</td></tr> ");
+            });
+            $(".domande").empty()
+            const table = $("<table class='bodytable'>", {
+                "class": "response"
+            })
+            table.html(items.join('')).appendTo(".domande")
         });
         return false;
     });

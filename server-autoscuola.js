@@ -252,6 +252,120 @@ app.post("/acc_mod", function(req, res) {
     });
 });
 
+//Inserimento Esami
+app.post('/esami', function(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    const request = {
+        "codfis": null,
+        "patente": null,
+        "tipo": null,
+        "date": null,
+        "time": null,
+    };
+    if (req.body.codfis == "" || req.body.patente == "" || req.body.tipo == "" || req.body.dt == "") {
+        res.status(500).send('Dato Obbligatorio Mancante!');
+    } else {
+        request["codfis"] = req.body.codfis.toUpperCase();
+        request["tipo"] = req.body.tipo.toLowerCase();
+        request["date"] = req.body.dt.substring(0, 10);
+        request["time"] = req.body.dt.substr(11) + ":00";
+        request["patente"] = req.body.patente.toUpperCase(); //dato query 6
+        console.log(request["date"], request["time"])
+        var domande = [];
+        var i = 0; 
+        var n = 0;
+        if(request["tipo"]=="teorico"){
+            n = 20;
+        } else {
+            n = 5;
+        }
+        for ( i = 0; i<n; i++ ){
+            domande[i] = Math.floor(Math.random()*60 +1);
+            var j = 0;
+            for(j = 0; j<i; j++){
+                if(domande[j]==domande[i]){
+                    i--;
+                    break;
+                }
+            }
+        }                                                                                                                   //INSERT INTO esame VALUES (DEFAULT, 'teorico', '10/03/21', 'B', '69EADDC7840A1D9E')
+        pool.query("INSERT INTO esame VALUES (DEFAULT, $1::varchar, $2::date, $3::varchar, $4::varchar) RETURNING id", [request["tipo"], new Date(request["date"]), request["patente"], request["codfis"]], function(err, result) {
+            if (err) {
+                console.log(err)
+                res.status(500).send(err.message)
+            } else{
+                var esameId = result.rows[0].id;
+                var insert = "INSERT INTO r8 VALUES";
+                var stringQuery = "";
+                var j = 0;
+                for( j=0; j<n; j++ ){
+                    var rispostaNum = Math.floor(Math.random()*10+1);
+                    var rispostaString;
+                    if(rispostaNum>5)   rispostaString = "true";
+                    else                rispostaString = "false";
+                    stringQuery = stringQuery+insert+" ("+(rispostaString=="true")+", "+domande[j]+", "+esameId+"); ";
+                }
+                pool.query(stringQuery, function(err, result) {
+                    if (err) {
+                        console.log(err)
+                        res.status(500).send(err.message)
+                    } else{
+                        res.status(200).send('Esame Inserito!')
+                    }
+                });
+            }
+        });
+    }
+
+});
+
+
+//Ricerca Esami
+app.get('/e_search', function(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    const request = {
+        "codfis": null,
+        "patente": null,
+        "data": null,
+        "tipo": null
+    };
+    if (req.query.codfis != "") request["codfis"] = req.query.codfis.toUpperCase();
+    if (req.query.patente != "") request["patente"] = req.query.patente.toUpperCase();
+    if (req.query.data != null && req.query.data != "") request["data"] = req.query.data.toUpperCase();
+    if (req.query.tipo != "") request["tipo"] = req.query.tipo.toLowerCase();
+    console.log(request)
+    pool.query("SELECT c.nome AS name, c.cognome AS surname, e.tipo AS type, e.data_e AS date, e.patente AS license, e.id AS idesame FROM esame AS e JOIN cliente AS c ON c.cod_fis = e.cliente WHERE e.cliente = $1 OR e.tipo = $2 OR e.patente = $3 OR e.data_e = $4", [request["codfis"], request["tipo"], request["patente"], request["data"]], function(err, result) {
+        if (err) {
+            console.log(err)
+            res.status(500).send(err.message)
+        } else
+            res.json(result)
+    });
+});
+
+
+//Mostra domande
+app.get('/domande', function(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    const request = {
+        "esame": null
+    };
+    if (req.query.esame == null || req.query.esame == "") {
+        res.status(500).send('Dato Obbligatorio Mancante!');
+    } else {
+        request["esame"] = req.query.esame;
+        console.log(request)
+        pool.query("SELECT d.testo AS text, d.risposta AS answer, r8.risposta_data AS canswer FROM domanda AS d JOIN r8 ON r8.domanda_8 = d.id_domanda WHERE r8.esame_8 = $1", [request["esame"]], function(err, result) {
+            if (err) {
+                console.log(err)
+                res.status(500).send(err.message)
+            } else
+                res.json(result)
+        });
+    }
+});
+
+
 app.listen(8000, function() {
     console.log('Server listening on port 8000!');
 });
