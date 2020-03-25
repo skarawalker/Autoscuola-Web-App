@@ -291,8 +291,6 @@ app.post('/esami', function(req, res) {
         var n = 0;
         if(request["tipo"]=="teorico"){
             n = 20;
-        } else {
-            n = 5;
         }
         for ( i = 0; i<n; i++ ){
             domande[i] = Math.floor(Math.random()*60 +1);
@@ -346,13 +344,15 @@ app.get('/e_search', function(req, res) {
         "data": null,
         "tipo": null
     };
+    console.log(req.query)
     if (req.query.codfis != "") request["codfis"] = req.query.codfis.toUpperCase();
     if (req.query.patente != "") request["patente"] = req.query.patente.toUpperCase();
     if (req.query.data != null && req.query.data != "") request["data"] = req.query.data.toUpperCase();
-    if (req.query.tipo != "") request["tipo"] = req.query.tipo.toLowerCase();
+    if (req.query.tipo != "" && req.query.tipo != null && req.query.tipo != "null" ) request["tipo"] = req.query.tipo.toLowerCase();
     console.log(request)
     pool.query("SELECT c.nome AS name, c.cognome AS surname, e.tipo AS type, e.data_e AS date, e.patente AS license,"+
-    " e.id AS idesame FROM esame AS e JOIN cliente AS c ON c.cod_fis = e.cliente WHERE e.cliente = $1 OR e.tipo = $2 OR e.patente = $3 OR e.data_e = $4"
+    " e.id AS idesame, c.cod_fis AS cod_fis FROM esame AS e JOIN cliente AS c ON c.cod_fis = e.cliente WHERE (e.cliente = $1 OR $1 IS NULL)"+
+    " AND (e.tipo = $2 OR $2 IS NULL) AND (e.patente = $3 OR $3 IS NULL) AND (e.data_e = $4 OR $4 IS NULL)"
     , [request["codfis"], request["tipo"], request["patente"], request["data"]], function(err, result) {
         if (err) {
             console.log(err)
@@ -369,11 +369,11 @@ app.get('/domande', function(req, res) {
     const request = {
         "esame": null
     };
-    if (req.query.esame == null || req.query.esame == "") {
+    if (req.query.id == null || req.query.id == "") {
         res.status(500).send('Dato Obbligatorio Mancante!');
     } else {
-        request["esame"] = req.query.esame;
-        console.log(request)
+        request["esame"] = req.query.id;
+        
         pool.query("SELECT d.testo AS text, d.risposta AS answer, r8.risposta_data AS canswer FROM domanda AS d JOIN r8 ON r8.domanda_8 = d.id_domanda WHERE r8.esame_8 = $1", [request["esame"]], function(err, result) {
             if (err) {
                 console.log(err)
