@@ -24,7 +24,7 @@ $(function() {
         const dn = $('input[name=dn]').val()
         const cf = $('input[name=cf]').val()
         e.preventDefault(); // avoid to execute the actual submit of the form.
-        $.getJSON(`http://localhost:8000/search?nome=${nome}&cognome=${cognome}&dn=${dn}&cf=${cf}`, function(data) {
+        $.getJSON(`http://localhost:8000/search_user?nome=${nome}&cognome=${cognome}&dn=${dn}&cf=${cf}`, function(data) {
             const items = [];
             items.push("<tr><th >Nome</th><th>Cognome</th><th>Codice Fiscale</th><th>Data Nascita</th><th>Data Iscrizione</th><th>Telefono</th> </tr>");
             $.each(data.rows, function(i, j) {
@@ -42,7 +42,7 @@ $(function() {
     });
 })
 
-//Aggiornamento valori acconto
+//ricerca degli acconti
 $(function() {
     // Handle money form
     $("#accontiForm").submit(function(e) {
@@ -67,7 +67,7 @@ $(function() {
     return false;
 });
 
-//
+// aggiornamento degli acconti
 $(function() {
     $('#upd_acconti').submit(function(e) {
         e.preventDefault(); // avoid to execute the actual submit of the form.
@@ -89,7 +89,7 @@ $(function() {
     $("#insertForm").submit(function(e) {
         e.preventDefault(); // avoid to execute the actual submit of the form.
         $.ajax({
-            url: '/ins',
+            url: '/user_add',
             type: 'post',
             data: $("#insertForm").serialize(),
             success: function(data) {

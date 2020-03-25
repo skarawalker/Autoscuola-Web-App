@@ -13,6 +13,9 @@
     width: 50%;
 }
 
+.header__title{
+    background-color: #334A80;
+}
 .bs-ul {
     vertical-align: middle;
     list-style-type: none;
@@ -20,7 +23,7 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #2080C0;
+    background-color: #334A80;
     margin-bottom: 30px;
 }
 

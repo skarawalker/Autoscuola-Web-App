@@ -41,7 +41,7 @@
     -moz-transition: left 0.3s;
     transition: left 0.3s;
     /* indichimo il colore dello sfondo del panello */
-    background: #2080C0;
+    background: #596580;
     /* indichiamo che sara sopra tutti gli altri elementi della pagina  */
     z-index: 2000;
 }
@@ -75,7 +75,7 @@
     /* indichimo il colore dllo sfondo del interruttore
      * di solito corrisponde al colore del panello 
     */
-    background: inherit;
+    background: #334A80;
     /* colore del testo */
     color: #dadada;
     /* tipo del cursore */
@@ -101,7 +101,6 @@
     text-decoration: none;
     
     /* css nuovo*/
-    
 	cursor: default;
 	height: 100vh;
 	left: 0;
@@ -142,6 +141,7 @@
 
 [id='l-nav-toggle']:checked~.l-nav>.l-nav-toggle {
     left: auto;
+    background-color: #596580;
     right: 2px;
     top: 1em;
 }
@@ -192,7 +192,7 @@
 
 body {
     -webkit-animation: bugfix infinite 1s;    
-    background-image: url(../images/backgroundcar.jpg) !important ; 
+    background-image: url(../images/3254309.jpg) !important ; 
     background-attachment: fixed;
     background-position: center center;
 }
@@ -238,6 +238,7 @@ body {
     width: 90%;
     padding: 0;
     margin: 10px 0;
+    background-color: inherit;
     text-align: center;
     text-shadow: rgba(255, 255, 255, .1) -1px -1px 1px, rgba(0, 0, 0, .5) 1px 1px 1px;
     font-size: 1.3em;
@@ -385,7 +386,7 @@ body {
     bottom: 0;
     height: 1px;
     width: 100%;
-    background: #04649b;
+    background:transparent;
     -webkit-transition: width .5s ease;
     transition: width .5s ease;
 }
@@ -397,21 +398,21 @@ body {
 
 .l-nav>ul>li>a:hover:before {
     width: 0%;
-    background: #0677a3;
+    background: #B3C9FF;
     -webkit-transition: width .5s ease;
     transition: width .5s ease;
 }
 
 .l-nav>ul>li>a:hover:after {
     width: 0%;
-    background: transparent;
+    background: rgb(193, 125, 95);
     -webkit-transition: width 0s ease;
     transition: width 0s ease;
 }
 
 
 /* lo sfondo oscurante della pagina  
- * in questo caso ellementi vengono blocati */
+ * in questo caso elementi vengono blocati */
 
 .mask-content {
     display: block;
@@ -437,7 +438,7 @@ body {
 /*tabelle*/
 .bodytable {
     padding: 1em;
-    background: #2080C0;
+    background: #596580;
     border-radius: 7px;
     margin-left: 1em;
     margin-right: 1em;
@@ -447,6 +448,10 @@ body {
 .bodytable td{
     width: 50%;
     position: relative;
+}
+
+.header__title{
+    background-color: #334A80;
 }
 
 .bodytable th{
@@ -467,7 +472,7 @@ body {
 }
 
 .aboutus_body {
-    background-color: #2080C0;
+    background-color: #334A80;
     border-radius: 1.5em;
     color: white;
     margin-left: 8em;
