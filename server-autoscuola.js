@@ -346,7 +346,7 @@ app.get('/e_search', function(req, res) {
     };
     console.log(req.query)
     if (req.query.codfis != "") request["codfis"] = req.query.codfis.toUpperCase();
-    if (req.query.patente != "") request["patente"] = req.query.patente.toUpperCase();
+    if (req.query.patente != "" && req.query.patente !=null &&req.query.patente !="null") request["patente"] = req.query.patente.toUpperCase();
     if (req.query.data != null && req.query.data != "") request["data"] = req.query.data.toUpperCase();
     if (req.query.tipo != "" && req.query.tipo != null && req.query.tipo != "null" ) request["tipo"] = req.query.tipo.toLowerCase();
     console.log(request)

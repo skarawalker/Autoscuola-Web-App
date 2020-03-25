@@ -10,7 +10,16 @@ $.getJSON('http://localhost:8000/getLicense', function(data) {
     $.each(data.rows, function(i, j) {
         items.push("<option value=" + j.nome_p + ">" + j.nome_p + "</select>");
     });
-    $("#selectLicense").append(items);
+    $("#selectLicense_i").append(items);
+});
+
+$.getJSON('http://localhost:8000/getLicense', function(data) {
+    var items = []
+    items.push("<option value="+null+">" + "Tutte" + "</select>");
+    $.each(data.rows, function(i, j) {
+        items.push("<option value=" + j.nome_p + ">" + j.nome_p + "</select>");
+    });
+    $("#selectLicense_s").append(items);
 });
 
 $(function() {
