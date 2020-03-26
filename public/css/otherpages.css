@@ -1,0 +1,74 @@
+  
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600");
+* {
+    box-sizing: border-box;
+}
+
+.search {
+    text-align: center;
+}
+
+h2 {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.column {
+    float: left;
+    width: 50%;
+}
+
+.header__title {
+    background-color: #334A80;
+}
+
+.bs-ul {
+    vertical-align: middle;
+    list-style-type: none;
+    height: 6%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #334A80;
+    margin-bottom: 30px;
+}
+
+.bs-li {
+    vertical-align: middle;
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    float: left;
+}
+
+.bs-li:active {
+    background-color: #08324e;
+}
+
+.bs-li:hover {
+    background-color: #043f66;
+}
+
+.bs-li a {
+    vertical-align: middle;
+}
+
+
+/* Change the link color to #111 (black) on hover */
+
+.response {
+    margin-top: 50px;
+}
+
+.divisore {
+    text-align: center;
+    width: 100%;
+    position: relative;
+    margin-bottom: 50px;
+}
+
+.left {
+    margin-left: 50px;
+    align-self: left;
+}
