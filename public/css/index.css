@@ -440,7 +440,8 @@ body {
     margin-left: 1em;
     margin-right: 1em;
     color: white;
-    width: 90%;
+    width: 95%;
+    align-content: center;
 }
 
 .bodytable td {

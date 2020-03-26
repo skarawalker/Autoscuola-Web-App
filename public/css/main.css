@@ -401,9 +401,6 @@ textarea {
     color: #555555;
 }
 
-a {
-    color: #ce1b28;
-}
 
 strong,
 b {
@@ -612,7 +609,7 @@ textarea {
     border-radius: 4px;
     border: none;
     border: solid 1px;
-    color: inherit;
+    color: rgba(206, 27, 40, 0.25);
     display: block;
     outline: 0;
     padding: 0 1rem;

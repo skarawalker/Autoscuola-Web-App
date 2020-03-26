@@ -428,7 +428,7 @@ h2 {
     color: white !important;
     font-weight: bold;
     background: #334A80;
-    border-radius: 1.5em;
+    border-radius: 0.2em;
     margin-right: 7em;
     margin-left: 7em;
 }
@@ -642,7 +642,7 @@ select {
 
 select option {
     color: #ffffff;
-    background: rgb(46, 162, 240);
+    background: #334A80;
 }
 
 select:focus::-ms-value {
