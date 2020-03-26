@@ -22,6 +22,12 @@ $.getJSON('http://localhost:8000/getGuideOggi', function(data) {
         html: items.join("")
     }).appendTo("#guide");
 });
+var item4chart = []
+$.getJSON('http://localhost:8000/getPatNum', function(data) {
+    $.each(data.rows, function(i, j) {
+        item4chart.push([j.patente, parseInt(j.numero)]);
+    });
+});
 
 //grafici
 google.charts.load('current', { 'packages': ['corechart'] });
@@ -38,13 +44,7 @@ function drawChart() {
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Patenti');
     data.addColumn('number', 'Quantità');
-    data.addRows([
-        ['Mushrooms', 3],
-        ['Onions', 1],
-        ['Olives', 1],
-        ['Zucchini', 1],
-        ['Pepperoni', 2]
-    ]);
+    data.addRows(item4chart);
 
     // Set chart options
     var options = {

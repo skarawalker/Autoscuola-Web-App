@@ -7,15 +7,6 @@ const opn = require('opn');
 const User = require('./User');
 var config = require('./config');
 const bodyParser = require("body-parser");
-
-//Database access token
-/*const config = {
-    user: 'starkiller',
-    database: 'autoscuola',
-    password: '7574hryq',
-    port: 5432
-};*/
-
 const pool = new pg.Pool(config);
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -64,6 +55,20 @@ app.get('/getGuideOggi', function(req, res) {
         }
     });
 });
+
+//Get the amount of people for license
+app.get('/getPatNum', function(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    pool.query("SELECT r1.patente_1 AS patente, COUNT(*) AS numero FROM cliente AS c JOIN R1 on c.cod_fis=r1.cliente_1 GROUP BY r1.patente_1 ORDER BY r1.patente_1", function(err, result) {
+        if (err) {
+            console.log(err.message)
+            res.status(500).send(err.message)
+        } else {
+            res.send(result)
+        }
+    });
+});
+
 // Search users
 app.get('/search_user', function(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
