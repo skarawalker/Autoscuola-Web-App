@@ -1,9 +1,9 @@
 // UI loads
 $(function() {
-    $('#left-side-panel').load('/public/left-side-panel.html');
+    $('#left-side-panel').load('/left-side-panel.html');
 });
 $(function() {
-    $('#top-bootstrap-bar-u').load('/public/top-bootstrap-bar-u.html');
+    $('#top-bootstrap-bar-u').load('/top-bootstrap-bar-u.html');
 });
 
 //options in license select

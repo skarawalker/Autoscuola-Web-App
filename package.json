@@ -1,21 +1,24 @@
 {
-  "name": "autoscuolaproject",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server-autoscuola.js",
-  "scripts": {
-    "start": "node server-autoscuola.js",
-    "dev": "nodemon server-autoscuola.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Starkiller13/AutoscuolaProject.git"
-  },
-  "author": "Costalonga Andrea, Scaramuzza Luca, Contino Salvatore",
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "nodemon": "^2.0.2",
-    "pg": "^7.17.1"
-  }
+    "name": "autoscuolaproject",
+    "version": "1.0.0",
+    "description": "",
+    "bin": "server-autoscuola.js",
+    "main": "server-autoscuola.js",
+    "scripts": {
+        "start": "node server-autoscuola.js",
+        "dev": "nodemon server-autoscuola.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Starkiller13/AutoscuolaProject.git"
+    },
+    "author": "Costalonga Andrea, Scaramuzza Luca, Contino Salvatore",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "express": "^4.17.1",
+        "helmet": "^3.22.0",
+        "nodemon": "^2.0.2",
+        "opn": "^6.0.0",
+        "pg": "^7.18.2"
+    }
 }
