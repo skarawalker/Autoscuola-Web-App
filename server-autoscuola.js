@@ -45,8 +45,8 @@ app.get('/getLicense', function(req, res) {
 //Get todays driving lessons
 app.get('/getGuideOggi', function(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    const date = new Date()
-    pool.query("SELECT * FROM guida JOIN cliente ON guida.cliente_g = cliente.cod_fis WHERE guida.data_guida = $1 ", [date], function(err, result) {
+    const date = new Date();
+    pool.query("SELECT c.nome AS nome, c.cognome AS cognome, g.patente_g AS patente, g.durata AS durata, g.ora_guida AS ora FROM guida AS g JOIN cliente AS C ON g.cliente_g = c.cod_fis WHERE g.data_guida >= $1 ", [date], function(err, result) {
         if (err) {
             console.log(err.message)
             res.status(500).send(err.message)
@@ -148,46 +148,31 @@ app.post('/user_add', function(req, res) {
 app.post('/guide', function(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     const request = {
-        "nome": null,
-        "cognome": null,
-        "dn": null,
+        "cod_fis":null,
         "date": null,
         "time": null,
         "patente": null,
         "durata": null,
         "istruttore": null
     };
-    var cf = null;
     const costo_mezzora = 20; //quasy dato query 3
-    if (req.body.nome == "" || req.body.cognome == "" || req.body.patente == "" || req.body.dt == "" || req.body.istruttore == "") {
+    if (req.body.cod_fis=="" || req.body.patente == "" || req.body.dt == "" || req.body.istruttore == "") {
         res.status(500).send('Dato Obbligatorio Mancante!');
     } else {
-        request["nome"] = req.body.nome.toUpperCase();
-        request["cognome"] = req.body.cognome.toUpperCase();
-        if (req.body.dn != null && req.body.dn != "") request["dn"] = req.body.dn.toUpperCase();
+        console.log(req.body);
         request["date"] = req.body.dt.substring(0, 10);
+        request["cod_fis"] = req.body.cod_fis.toUpperCase();
         request["time"] = req.body.dt.substr(11) + ":00";
         request["patente"] = req.body.patente.toUpperCase(); //dato query 6
         request["durata"] = req.body.durata.toUpperCase(); //dato query 4
         request["istruttore"] = req.body.istruttore.toUpperCase(); //dato query 7
-        console.log(request["date"], request["time"])
-        pool.query("SELECT cliente.cod_fis FROM cliente JOIN r1 ON cliente.cod_fis=r1.cliente_1 WHERE cliente.nome=$1::varchar AND" +
-            " cliente.cognome=$2 AND (cliente.data_nascita=$3::date OR $3::varchar IS NULL ) AND r1.patente_1=$4::varchar", [request["nome"], request["cognome"], request["dn"], request["patente"]],
-            function(err, result) {
-                if (err) {
-                    console.log(err.message)
-                    res.status(500).send(err.message)
-                } else {
-                    cf = result.rows[0].cod_fis; //dato query 5
-                    console.log(cf)
-                    pool.query("INSERT INTO guida VALUES ($1::date, $2::time, $3::float, $4::float, $5::varchar, $6::varchar, $7::varchar)", [new Date(request["date"]), request["time"], costo_mezzora * request["durata"], request["durata"] * 30, cf, request["patente"], request["istruttore"]], function(err) {
-                        if (err) {
-                            console.log(err)
-                            res.status(500).send(err.message)
-                        } else
-                            res.status(200).send('Guida Inserita!')
-                    });
-                }
+        console.log(request)
+        pool.query("INSERT INTO guida VALUES ($1::date, $2::time, $3::float, $4::float, $5::varchar, $6::varchar, $7::varchar)", [new Date(request["date"]), request["time"], costo_mezzora * request["durata"], request["durata"] * 30, request["cod_fis"], request["patente"], request["istruttore"]], function(err) {
+                    if (err) {
+                        console.log(err)
+                        res.status(500).send(err.message)
+                    } else
+                        res.status(200).send('Guida Inserita!')
             });
     }
 
@@ -384,6 +369,6 @@ app.get('/domande', function(req, res) {
 
 
 app.listen(8000, function() {
-    opn("http://localhost:8000");
+    //opn("http://localhost:8000");
     console.log('Server listening on port 8000!');
 });
