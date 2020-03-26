@@ -8,14 +8,20 @@
     text-align: center;
 }
 
+h2 {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
 .column {
     float: left;
     width: 50%;
 }
 
-.header__title{
+.header__title {
     background-color: #334A80;
 }
+
 .bs-ul {
     vertical-align: middle;
     list-style-type: none;
