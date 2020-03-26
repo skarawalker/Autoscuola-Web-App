@@ -13,6 +13,11 @@
     width: 50%;
 }
 
+h2{
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
 .header__title{
     background-color: #334A80;
 }

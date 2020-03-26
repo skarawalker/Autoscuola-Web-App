@@ -22,15 +22,13 @@ $.getJSON('http://localhost:8000/getGuideOggi', function(data) {
         html: items.join("")
     }).appendTo("#guide");
 });
-var item4chart = []
+
 $.getJSON('http://localhost:8000/getPatNum', function(data) {
+    var item4chart = [];
     $.each(data.rows, function(i, j) {
         item4chart.push([j.patente, parseInt(j.numero)]);
     });
-});
-
-//grafici
-google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.load('current', { 'packages': ['corechart'] });
 
 // Set a callback to run when the Google Visualization API is loaded.
 google.charts.setOnLoadCallback(drawChart);
@@ -45,12 +43,12 @@ function drawChart() {
     data.addColumn('string', 'Patenti');
     data.addColumn('number', 'Quantità');
     data.addRows(item4chart);
-
+    console.log(data)
     // Set chart options
     var options = {
         backgroundColor: { fill: 'transparent' },
-        'title': 'Grafico per prova',
-        'width': 400,
+        'title': '',
+        'width': 500,
         'height': 300
     };
 
@@ -58,3 +56,7 @@ function drawChart() {
     var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
     chart.draw(data, options);
 }
+});
+
+
+//grafici

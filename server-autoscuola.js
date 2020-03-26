@@ -65,6 +65,7 @@ app.get('/getPatNum', function(req, res) {
             res.status(500).send(err.message)
         } else {
             res.send(result)
+            
         }
     });
 });
