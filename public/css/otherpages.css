@@ -72,3 +72,8 @@ h2 {
     margin-left: 50px;
     align-self: left;
 }
+
+main {
+    max-width: 1024px !important;
+    margin: 0 auto;
+}

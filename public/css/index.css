@@ -5,7 +5,7 @@
 
 .columni {
     float: left;
-    width: 33%;
+    width: 30%;
 }
 
 .columni h2 {
@@ -440,13 +440,16 @@ body {
     margin-left: 1em;
     margin-right: 1em;
     color: white;
-    width: 95%;
-    align-content: center;
+    width: 90%;
 }
 
 .bodytable td {
     width: 50%;
     position: relative;
+}
+
+.bodytable tr{
+    width: 80%;
 }
 
 .header__title {
@@ -480,5 +483,6 @@ body {
 
 main {
     max-width: max-content;
-    margin: 0 auto
+    margin: 0 auto;
+    padding-left: 4em;
 }
