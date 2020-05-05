@@ -46,7 +46,7 @@ app.get('/getLicense', function(req, res) {
 app.get('/getGuideOggi', function(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     const date = new Date();
-    pool.query("SELECT c.nome AS nome, c.cognome AS cognome, g.patente_g AS patente, g.durata AS durata, g.ora_guida AS ora FROM guida AS g JOIN cliente AS C ON g.cliente_g = c.cod_fis WHERE g.data_guida >= $1 ", [date], function(err, result) {
+    pool.query("SELECT c.cognome AS cognome, g.patente_g AS patente, g.durata AS durata, g.ora_guida AS ora, g.data_guida AS data FROM guida AS g JOIN cliente AS C ON g.cliente_g = c.cod_fis WHERE g.data_guida >= $1 ", [date], function(err, result) {
         if (err) {
             console.log(err.message)
             res.status(500).send(err.message)
@@ -210,6 +210,7 @@ app.get('/acconti', function(req, res) {
         "cognome": null,
         "cf": null,
     }
+    
     if (req.query.nome2 != null) request["nome"] = req.query.nome2.toUpperCase();
     if (req.query.cognome2 != null) request["cognome"] = req.query.cognome2.toUpperCase();
     if (req.query.cf2 != null) request["cf"] = req.query.cf2.toUpperCase();
@@ -234,6 +235,7 @@ app.post("/acc_mod", function(req, res) {
         "acc1_new": null,
         "acc2_new": null
     }
+    console.log("sono qui");
     if (req.body.acc1 == null || req.body.acc1 == '') request["acc1_new"] = req.body.acconto1
     else request["acc1_new"] = req.body.acc1
     if (req.body.acc2 == null || req.body.acc2 == '') request["acc2_new"] = req.body.acconto2
@@ -369,6 +371,6 @@ app.get('/domande', function(req, res) {
 
 
 app.listen(8000, function() {
-    //opn("http://localhost:8000");
+    opn("http://localhost:8000");
     console.log('Server listening on port 8000!');
 });
