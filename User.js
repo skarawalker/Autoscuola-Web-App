@@ -4,7 +4,7 @@ const User = {
     async readPending(req, res) {
         res.setHeader('Access-Control-Allow-Origin', '*');
         try {
-            const readPendingQuery = 'SELECT nome,cognome,data_scadenza FROM cliente JOIN r2 ON cliente.cod_fis=r2.cliente_2 ORDER BY data_scadenza LIMIT 10';
+            const readPendingQuery = 'SELECT * FROM pat_scadenza LIMIT 10';
             const { rows } = await database.query(readPendingQuery);
             return res.send({ rows });
         } catch (error) {
