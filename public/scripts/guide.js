@@ -57,9 +57,9 @@ $(function() {
         // avoid to execute the actual submit of the form.
         $.getJSON(`http://localhost:8000/g_search?data=${date}&nome=${nome}&cognome=${cognome}`, function(data) {
             const items = [];
-            items.push("<tr class='.tr'><th class='.th'>Data</th> <th class='.th'>Ora</th><th class='.th'>Istruttore</th><th class='.th'>Persona</th></tr>");
+            items.push("<tr class='.tr'><th class='.th' style='width: 20%;'>Data</th> <th class='.th' style='width: 20%;'>Ora</th><th class='.th' style='width: 30%;'>Istruttore</th><th class='.th' style='width: 30%;'>Persona</th></tr>");
             $.each(data.rows, function(i, j) {
-                items.push("<tr><td class='.td' >" + new Date(j.date).toLocaleDateString('it-IT') + "</td> " + "<td class='.td' > " + j.time + "<td class='.td' > " + j.i_name + " " + j.i_surname + " </td> " + "<td class='.td' > " + j.name + " " + j.surname + "</td ></tr> ");
+                items.push("<tr><td class='.td' style='width: 20%;'>" + new Date(j.date).toLocaleDateString('it-IT') + "</td> " + "<td class='.td' style='width: 20%;'> " + j.time + "<td class='.td' style='width: 30%;'> " + j.i_name + " " + j.i_surname + " </td> " + "<td class='.td' style='width: 30%;'> " + j.name + " " + j.surname + "</td ></tr> ");
             });
             $(".response").empty()
             const table = $("<table class='bodytable'>", {

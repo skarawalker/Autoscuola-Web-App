@@ -26,11 +26,11 @@ $(function() {
         e.preventDefault(); // avoid to execute the actual submit of the form.
         $.getJSON(`http://localhost:8000/search_user?nome=${nome}&cognome=${cognome}&dn=${dn}&cf=${cf}`, function(data) {
             const items = [];
-            items.push("<tr><th >Nome</th><th>Cognome</th><th>Codice Fiscale</th><th>Data Nascita</th><th>Data Iscrizione</th><th>Telefono</th> </tr>");
+            items.push("<tr><th style='width: 16%;'>Nome</th><th style='width: 16%;'>Cognome</th><th style='width: 20%;'>Codice Fiscale</th><th style='width: 16%;'>Data Nascita</th><th style='width: 16%;'>Data Iscrizione</th><th style='width: 16%;'>Telefono</th> </tr>");
             $.each(data.rows, function(i, j) {
                 const dataNascita = new Date(j.data_nascita)
                 const dataIscrizione = new Date(j.data_iscrizione)
-                items.push("<tr class='result'><td>" + j.nome + "</td><td>" + j.cognome + "</td><td>" + j.cod_fis + "</td><td>" + dataNascita.toLocaleDateString('it-IT') + "</td><td>" + dataIscrizione.toLocaleDateString('it-IT') + "</td><td>" + j.telefono + "</td></tr>");
+                items.push("<tr class='result'><td style='width: 16%;'>" + j.nome + "</td><td style='width: 16%;'>" + j.cognome + "</td><td style='width: 20%;'>" + j.cod_fis + "</td><td style='width: 16%;'>" + dataNascita.toLocaleDateString('it-IT') + "</td><td style='width: 16%;'>" + dataIscrizione.toLocaleDateString('it-IT') + "</td><td style='width: 16%;'>" + j.telefono + "</td></tr>");
             });
             $(".response").empty()
             const table = $("<table class='bodytable'>", {

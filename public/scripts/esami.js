@@ -81,10 +81,10 @@ $(function() {
         // avoid to execute the actual submit of the form.
         $.getJSON(`http://localhost:8000/e_search?data=${date}&codfis=${codfis}&patente=${patente}&tipo=${tipo}`, function(data) {
             const items = [];
-            items.push("<tr class='.tr'><th class='.th'>Nome</th> <th class='.th'>Cognome</th><th class='.th'>Data</th><th class='.th'>Patente</th><th class='.th'>Tipo</th><th class='.th'>Domande</th></tr>");
+            items.push("<tr class='.tr'><th class='.th' style='width: 16px;'>Nome</th> <th class='.th' style='width: 16px;'>Cognome</th><th class='.th' style='width: 16px;'>Data</th><th class='.th' style='width: 16px;'>Patente</th><th class='.th' style='width: 16px;'>Tipo</th><th class='.th' style='width: 16px;'>Domande</th></tr>");
             $.each(data.rows, function(i, j) {
-                items.push("<tr><td class='.td' >" + j.name + "</td>" + "<td class='.td' > " + j.surname + "</td >" + "<td class='.td' >" + new Date(j.date).toLocaleDateString('it-IT') + "</td> " + "<td class='.td' > " + j.license + "<td class='.td' > " + j.type + "</td> " +
-                    "<td class='.td' > ");
+                items.push("<tr><td class='.td' style='width: 16px;'>" + j.name + "</td>" + "<td class='.td' style='width: 16px;'> " + j.surname + "</td >" + "<td class='.td' style='width: 16px;'>" + new Date(j.date).toLocaleDateString('it-IT') + "</td> " + "<td class='.td' style='width: 16px;'> " + j.license + "<td class='.td' style='width: 16px;'> " + j.type + "</td> " +
+                    "<td class='.td' style='width: 16px;'> ");
                 if (j.type == "teorico")
                     items.push("<button onclick='mostraDomande(" + j.idesame + ")'>MOSTRA</button>" + "</td></tr> ")
                 else
