@@ -46,7 +46,7 @@ app.get('/getLicense', function(req, res) {
 app.get('/getGuideOggi', function(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     const date = new Date();
-    pool.query("SELECT * FROM ricerca_guide WHERE g.data_guida = $1 ", [date], function(err, result) {
+    pool.query("SELECT * FROM ricerca_guide WHERE date = $1 ", [date], function(err, result) {
         if (err) {
             console.log(err.message)
             res.status(500).send(err.message)
@@ -190,7 +190,7 @@ app.get('/g_search', function(req, res) {
     if (req.query.cognome1 != "") request["cognome"] = req.query.cognome.toUpperCase();
     if (req.query.data != null && req.query.data != "") request["data"] = req.query.data.toUpperCase();
     console.log(request)
-    pool.query("SELECT * FROM ricerca_guide WHERE (nome= $1  AND cognome = $2 ) OR date = $3", [request["nome"], request["cognome"], request["data"]],
+    pool.query("SELECT * FROM ricerca_guide WHERE (name= $1  AND surname = $2 ) OR date = $3", [request["nome"], request["cognome"], request["data"]],
         function(err, result) {
             if (err) {
                 console.log(err)

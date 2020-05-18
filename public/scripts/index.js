@@ -15,7 +15,7 @@ $.getJSON('http://localhost:8000/getGuideOggi', function(data) {
     var items = []
     items.push("<tr><th  class='intestazione' style='text-align:left'>Cognome</th><th style='text-align:left' class='intestazione'>Patente </th> <th style='text-align:left' class='intestazione'>Ora</th><th style='text-align:left' class='intestazione'>Data</th><th style='text-align:left' class='intestazione'>Durata(min)</th></tr>");
     $.each(data.rows, function(i, j) {
-        items.push("<tr><td>" + j.cognome + "</td><td>" + j.patente + "</td><td>" + j.ora + "</td> + j.durata</td><td>" + new Date(j.data).toLocaleDateString('it-IT') +"</td><td>"+ j.durata+"</td></tr>");
+        items.push("<tr><td>" + j.surname + "</td><td>" + j.license + "</td><td>" + j.time + "</td> + j.durata</td><td>" + new Date(j.date).toLocaleDateString('it-IT') +"</td><td>"+ j.duration+"</td></tr>");
     });
     $("<table>", {
         "class": "bodytable",
