@@ -184,15 +184,14 @@ app.get('/g_search', function(req, res) {
     const request = {
         "nome": null,
         "cognome": null,
-        "data": null,
-        "cut" :null
+        "data": null
     };
     console.log(req.query);
-    if (req.query.nome1 != "") request["nome"] = req.query.nome.toUpperCase();
-    if (req.query.cognome1 != "") request["cognome"] = req.query.cognome.toUpperCase();
-    if (req.query.data != null && req.query.data != "") request["data"] = req.query.data.toUpperCase();
+    if (req.query.nome != "") request["nome"] = req.query.nome.toUpperCase();
+    if (req.query.cognome != "") request["cognome"] = req.query.cognome.toUpperCase();
+    if (req.query.data != null && req.query.data != "") request["data"] = req.query.data.substring(0, 10);
     console.log(request)
-    pool.query("SELECT * FROM ricerca_guide WHERE ((name= $1 OR $1 IS NULL)  AND (surname = $2 IS NULL)) OR (date = $3 OR $3 IS NULL) ORDER BY date ASC", [request["nome"], request["cognome"], request["data"]],
+    pool.query("SELECT * FROM ricerca_guide WHERE ((name= $1 OR $1 IS NULL)  AND (surname = $2 OR $2 IS NULL)) AND (date = $3 OR $3 IS NULL) ORDER BY date ASC", [request["nome"], request["cognome"], request["data"]],
         function(err, result) {
             if (err) {
                 console.log(err)
