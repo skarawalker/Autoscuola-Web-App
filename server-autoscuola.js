@@ -184,13 +184,15 @@ app.get('/g_search', function(req, res) {
     const request = {
         "nome": null,
         "cognome": null,
-        "data": null
+        "data": null,
+        "cut" :null
     };
+    console.log(req.query);
     if (req.query.nome1 != "") request["nome"] = req.query.nome.toUpperCase();
     if (req.query.cognome1 != "") request["cognome"] = req.query.cognome.toUpperCase();
     if (req.query.data != null && req.query.data != "") request["data"] = req.query.data.toUpperCase();
     console.log(request)
-    pool.query("SELECT * FROM ricerca_guide WHERE (name= $1  AND surname = $2 ) OR date = $3", [request["nome"], request["cognome"], request["data"]],
+    pool.query("SELECT * FROM ricerca_guide WHERE ((name= $1 OR $1 IS NULL)  AND (surname = $2 IS NULL)) OR (date = $3 OR $3 IS NULL) ORDER BY date ASC", [request["nome"], request["cognome"], request["data"]],
         function(err, result) {
             if (err) {
                 console.log(err)
@@ -333,7 +335,7 @@ app.get('/e_search', function(req, res) {
     if (req.query.tipo != "" && req.query.tipo != null && req.query.tipo != "null") request["tipo"] = req.query.tipo.toLowerCase();
     pool.query("SELECT c.nome AS name, c.cognome AS surname, e.tipo AS type, e.data_e AS date, e.patente AS license," +
         " e.id AS idesame, c.cod_fis AS cod_fis FROM esame AS e JOIN cliente AS c ON c.cod_fis = e.cliente WHERE (e.cliente = $1 OR $1 IS NULL)" +
-        " AND (e.tipo = $2 OR $2 IS NULL) AND (e.patente = $3 OR $3 IS NULL) AND (e.data_e = $4 OR $4 IS NULL)", [request["codfis"], request["tipo"], request["patente"], request["data"]],
+        " AND (e.tipo = $2 OR $2 IS NULL) AND (e.patente = $3 OR $3 IS NULL) AND (e.data_e = $4 OR $4 IS NULL) ORDER BY e.data_e ASC", [request["codfis"], request["tipo"], request["patente"], request["data"]],
         function(err, result) {
             if (err) {
                 console.log(err)

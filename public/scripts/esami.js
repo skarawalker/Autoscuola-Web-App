@@ -82,9 +82,17 @@ $(function() {
         $.getJSON(`http://localhost:8000/e_search?data=${date}&codfis=${codfis}&patente=${patente}&tipo=${tipo}`, function(data) {
             const items = [];
             items.push("<tr class='.tr'><th class='.th' style='width: 16px;'>Nome</th> <th class='.th' style='width: 16px;'>Cognome</th><th class='.th' style='width: 16px;'>Data</th><th class='.th' style='width: 16px;'>Patente</th><th class='.th' style='width: 16px;'>Tipo</th><th class='.th' style='width: 16px;'>Domande</th></tr>");
+            var today = new Date();
+                var str = "";
+                var cnt =0;
             $.each(data.rows, function(i, j) {
-                items.push("<tr><td class='.td' style='width: 16px;'>" + j.name + "</td>" + "<td class='.td' style='width: 16px;'> " + j.surname + "</td >" + "<td class='.td' style='width: 16px;'>" + new Date(j.date).toLocaleDateString('it-IT') + "</td> " + "<td class='.td' style='width: 16px;'> " + j.license + "<td class='.td' style='width: 16px;'> " + j.type + "</td> " +
+                if(new Date(j.date)>=today&&cnt==0){
+                    str="style='background-color:#FF0000'";
+                    cnt++;
+                }
+                items.push("<tr "+str+"><td class='.td' style='width: 16px;'>" + j.name + "</td>" + "<td class='.td' style='width: 16px;'> " + j.surname + "</td >" + "<td class='.td' style='width: 16px;'>" + new Date(j.date).toLocaleDateString('it-IT') + "</td> " + "<td class='.td' style='width: 16px;'> " + j.license + "<td class='.td' style='width: 16px;'> " + j.type + "</td> " +
                     "<td class='.td' style='width: 16px;'> ");
+                str="";
                 if (j.type == "teorico")
                     items.push("<button onclick='mostraDomande(" + j.idesame + ")'>MOSTRA</button>" + "</td></tr> ")
                 else
