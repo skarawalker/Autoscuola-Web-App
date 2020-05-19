@@ -15,7 +15,7 @@ $.getJSON('http://localhost:8000/getLicense', function(data) {
 
 $.getJSON('http://localhost:8000/getLicense', function(data) {
     var items = []
-    items.push("<option value=" + null + ">" + "Tutte" + "</select>");
+    items.push("<option value=null>" + "Tutte" + "</select>");
     $.each(data.rows, function(i, j) {
         items.push("<option value=" + j.nome_p + ">" + j.nome_p + "</select>");
     });

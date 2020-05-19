@@ -213,7 +213,7 @@ app.get('/acconti', function(req, res) {
     if (req.query.cognome2 != null) request["cognome"] = req.query.cognome2.toUpperCase();
     if (req.query.cf2 != null) request["cf"] = req.query.cf2.toUpperCase();
     pool.query("SELECT * FROM CLIENTE JOIN R1 ON cliente.cod_fis = r1.cliente_1 JOIN PATENTE ON r1.patente_1 = patente.nome_p" +
-        " WHERE (cliente.nome= $1 OR $1 IS NULL) AND (cliente.cognome = $2 OR $2='')  AND ( cliente.cod_fis= $3 OR $3='')", [request["nome"], request["cognome"], request["cf"]],
+        " WHERE (cliente.nome= $1 OR $1 IS NULL) AND (cliente.cognome = $2 OR $2='')  OR ( cliente.cod_fis= $3 OR $3='')", [request["nome"], request["cognome"], request["cf"]],
         function(err, result) {
             if (err) {
                 console.log(err.message)
@@ -327,12 +327,10 @@ app.get('/e_search', function(req, res) {
         "data": null,
         "tipo": null
     };
-    console.log(req.query)
     if (req.query.codfis != "") request["codfis"] = req.query.codfis.toUpperCase();
     if (req.query.patente != "" && req.query.patente != null && req.query.patente != "null") request["patente"] = req.query.patente.toUpperCase();
     if (req.query.data != null && req.query.data != "") request["data"] = req.query.data.toUpperCase();
     if (req.query.tipo != "" && req.query.tipo != null && req.query.tipo != "null") request["tipo"] = req.query.tipo.toLowerCase();
-    console.log(request)
     pool.query("SELECT c.nome AS name, c.cognome AS surname, e.tipo AS type, e.data_e AS date, e.patente AS license," +
         " e.id AS idesame, c.cod_fis AS cod_fis FROM esame AS e JOIN cliente AS c ON c.cod_fis = e.cliente WHERE (e.cliente = $1 OR $1 IS NULL)" +
         " AND (e.tipo = $2 OR $2 IS NULL) AND (e.patente = $3 OR $3 IS NULL) AND (e.data_e = $4 OR $4 IS NULL)", [request["codfis"], request["tipo"], request["patente"], request["data"]],
