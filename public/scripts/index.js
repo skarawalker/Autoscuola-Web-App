@@ -1,10 +1,10 @@
 $.getJSON('http://localhost:8000/getNextExpirations', function(data) {
     var items = []
-    items.push("<tr><th class='intestazione'>Nome</th><th class='intestazione'>Cognome</th><th class='intestazione'>Data Scadenza</th> </tr>");
+    items.push("<tr><th class='intestazione'>Nome</th><th class='intestazione'>Cognome</th><th class='intestazione'>Data Scadenza</th><th class='intestazione'>Telefono</th> </tr>");
     $.each(data.rows, function(i, j) {
         const dataScadenza = new Date(j.data_scadenza)
         
-        items.push("<tr><td>" + j.nome + "</td> " + "<td>" + j.cognome + "</td><td>" + dataScadenza.toLocaleDateString('it-IT') + "</td></tr>");
+        items.push("<tr><td>" + j.nome + "</td> " + "<td>" + j.cognome + "</td><td>" + dataScadenza.toLocaleDateString('it-IT') + "</td><td>"+ j.telefono+"</td></tr>");
     });
     $("<table>", {
         "class": "bodytable",
@@ -13,9 +13,9 @@ $.getJSON('http://localhost:8000/getNextExpirations', function(data) {
 });
 $.getJSON('http://localhost:8000/getGuideOggi', function(data) {
     var items = []
-    items.push("<tr><th  class='intestazione' style='text-align:left'>Cognome</th><th style='text-align:left' class='intestazione'>Patente </th> <th style='text-align:left' class='intestazione'>Ora</th><th style='text-align:left' class='intestazione'>Data</th><th style='text-align:left' class='intestazione'>Durata(min)</th></tr>");
+    items.push("<tr><th  class='intestazione' style='text-align:left'>Cognome</th><th style='text-align:left' class='intestazione'>Patente </th> <th style='text-align:left' class='intestazione'>Ora</th><th style='text-align:left' class='intestazione'>Durata(min)</th><th style='text-align:left' class='intestazione'>Istruttore</th></tr>");
     $.each(data.rows, function(i, j) {
-        items.push("<tr><td>" + j.surname + "</td><td>" + j.license + "</td><td>" + j.time + "</td> + j.durata</td><td>" + new Date(j.date).toLocaleDateString('it-IT') +"</td><td>"+ j.duration+"</td></tr>");
+        items.push("<tr><td>" + j.surname + "</td><td>" + j.license + "</td><td>" + j.time + "</td><td style='text-align:right'>"+ j.duration+"</td><td>"+j.i_name+" "+j.i_surname+"</td></tr>");
     });
     $("<table>", {
         "class": "bodytable",
@@ -52,7 +52,7 @@ function drawChart() {
         'height': 300
     };
 
-    // Instantiate and draw our chart, passing in some options.
+    // Disegno il grafico nella pagina
     var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
     chart.draw(data, options);
 }

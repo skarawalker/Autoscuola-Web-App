@@ -5,12 +5,10 @@
 
 .columni {
     float: left;
-    width: 30%;
+    width: 32%;
 }
 
 .columni h2 {
-    margin-left: 2em;
-    margin-right: 2em;
     text-align: center;
 }
 

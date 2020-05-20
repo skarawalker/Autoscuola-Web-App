@@ -25,7 +25,7 @@ $.getJSON('http://localhost:8000/getLicense', function(data) {
 });
 
 $(function() {
-    // Handle search form
+    // Handle inset form
     $("#guideForm").submit(function(e) {
         e.preventDefault(); // avoid to execute the actual submit of the form.
         $.ajax({

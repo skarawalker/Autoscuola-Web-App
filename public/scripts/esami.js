@@ -23,24 +23,6 @@ $.getJSON('http://localhost:8000/getLicense', function(data) {
 });
 
 $(function() {
-    // Gestione form inserimento esami
-    $("#esamiForm").submit(function(e) {
-        e.preventDefault(); // avoid to execute the actual submit of the form.
-        $.ajax({
-            url: '/esami',
-            type: 'post',
-            data: $("#esamiForm").serialize(),
-            success: function(data) {
-                alert("Esame Inserito")
-            },
-            error: function(e) {
-                alert(e.responseText)
-            }
-        });
-    });
-});
-
-$(function() {
     $('#left-side-panel').load('left-side-panel.html');
 });
 $(function() {
@@ -48,7 +30,6 @@ $(function() {
 });
 
 $(function() {
-    // Handle search form
     $("#esamiForm").submit(function(e) {
         e.preventDefault(); // avoid to execute the actual submit of the form.
         $.ajax({

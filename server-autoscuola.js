@@ -59,7 +59,7 @@ app.get('/getGuideOggi', function(req, res) {
 //Get the amount of people for license
 app.get('/getPatNum', function(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    pool.query("SELECT r1.patente_1 AS patente, COUNT(*) AS numero FROM cliente AS c JOIN R1 on c.cod_fis=r1.cliente_1 GROUP BY r1.patente_1 ORDER BY r1.patente_1", function(err, result) {
+    pool.query("SELECT r1.patente_1 AS patente, COUNT(*) AS numero FROM cliente AS c JOIN R1 on c.cod_fis=r1.cliente_1 GROUP BY r1.patente_1 ORDER BY numero DESC", function(err, result) {
         if (err) {
             console.log(err.message)
             res.status(500).send(err.message)
@@ -209,12 +209,12 @@ app.get('/acconti', function(req, res) {
         "cognome": null,
         "cf": null,
     }
-    
+    console.log(req.query);
     if (req.query.nome2 != null) request["nome"] = req.query.nome2.toUpperCase();
     if (req.query.cognome2 != null) request["cognome"] = req.query.cognome2.toUpperCase();
     if (req.query.cf2 != null) request["cf"] = req.query.cf2.toUpperCase();
     pool.query("SELECT * FROM CLIENTE JOIN R1 ON cliente.cod_fis = r1.cliente_1 JOIN PATENTE ON r1.patente_1 = patente.nome_p" +
-        " WHERE (cliente.nome= $1 OR $1 IS NULL) AND (cliente.cognome = $2 OR $2='')  OR ( cliente.cod_fis= $3 OR $3='')", [request["nome"], request["cognome"], request["cf"]],
+        " WHERE (cliente.nome= $1 OR $1='') AND (cliente.cognome = $2 OR $2='')  AND ( cliente.cod_fis= $3 OR $3='')", [request["nome"], request["cognome"], request["cf"]],
         function(err, result) {
             if (err) {
                 console.log(err.message)
@@ -368,6 +368,5 @@ app.get('/domande', function(req, res) {
 
 
 app.listen(8000, function() {
-    opn("http://localhost:8000");
     console.log('Server listening on port 8000!');
 });
