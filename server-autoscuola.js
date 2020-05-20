@@ -46,7 +46,7 @@ app.get('/getLicense', function(req, res) {
 app.get('/getGuideOggi', function(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     const date = new Date();
-    pool.query("SELECT * FROM ricerca_guide WHERE date = $1 ", [date], function(err, result) {
+    pool.query("SELECT * FROM ricerca_guide WHERE date = $1 ORDER BY time ASC ", [date], function(err, result) {
         if (err) {
             console.log(err.message)
             res.status(500).send(err.message)
@@ -271,7 +271,15 @@ app.post('/esami', function(req, res) {
         request["time"] = req.body.dt.substr(11) + ":00";
         request["patente"] = req.body.patente.toUpperCase(); //dato query 6
         console.log(request["date"], request["time"])
-        var domande = [];
+        pool.query("INSERT INTO esame VALUES (DEFAULT, $1::varchar, $2::date, $3::varchar, $4::varchar) RETURNING id", [request["tipo"], new Date(request["date"]), request["patente"], request["codfis"]], function(err, result){
+            if (err) {
+                console.log(err)
+                res.status(500).send(err.message)
+            } else {
+                res.status(200).send("esame inserito!");
+            }
+        });
+        /*var domande = [];
         var i = 0;
         var n = 0;
         if (request["tipo"] == "teorico") {
@@ -313,7 +321,7 @@ app.post('/esami', function(req, res) {
                     }
                 });
             }
-        });
+        });*/
     }
 
 });
